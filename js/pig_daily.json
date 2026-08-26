@@ -1,0 +1,16 @@
+[
+  {
+    "date": "2026-08-25",
+    "mainland": 3341,
+    "local": 126,
+    "total": 3467,
+    "high": 1600,
+    "low": 750,
+    "avg": 913,
+    "forecast": {
+      "mainland": 2736,
+      "local": 100,
+      "total": 2836
+    }
+  }
+]

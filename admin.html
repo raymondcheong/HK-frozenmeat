@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>後台管理｜港滙肉訊</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="site-header"></header>
+
+<main class="container">
+  <h1 class="page-title">後台管理系統</h1>
+
+  <!-- 登入 -->
+  <div class="card admin-login" id="login-panel">
+    <h2>管理員登入</h2>
+    <div class="notice" id="login-notice" style="display:none;"></div>
+    <div class="form-row">
+      <label>密碼（示範密碼：admin123）</label>
+      <input type="password" id="pwd" placeholder="請輸入管理密碼">
+    </div>
+    <button class="btn" style="width:100%;" onclick="doLogin()">登入</button>
+  </div>
+
+  <!-- 管理面板 -->
+  <div id="admin-panel" style="display:none;">
+    <div class="admin-tabs">
+      <button class="on" data-tab="news-form">發佈／編輯資訊</button>
+      <button data-tab="news-list">資訊管理</button>
+      <button data-tab="analysis-form">發佈／編輯分析</button>
+      <button data-tab="analysis-list">分析管理</button>
+      <button data-tab="cats">分類管理</button>
+      <button data-tab="pig">活豬數據</button>
+      <button class="btn-grey" style="margin-left:auto;" onclick="doLogout()">登出</button>
+    </div>
+    <div class="notice" id="admin-notice" style="display:none;"></div>
+
+    <!-- 資訊表單 -->
+    <div class="card tab-pane" id="tab-news-form">
+      <h2 id="news-form-title">發佈新資訊</h2>
+      <input type="hidden" id="nf-id">
+      <div class="grid grid-2">
+        <div class="form-row"><label>標題 *</label><input id="nf-title"></div>
+        <div class="form-row"><label>日期 *</label><input type="date" id="nf-date"></div>
+        <div class="form-row"><label>分類 *</label><select id="nf-cat"></select></div>
+        <div class="form-row"><label>地區</label>
+          <select id="nf-region"><option>香港</option><option>中國內地</option><option>國際</option></select></div>
+        <div class="form-row"><label>來源機構</label><input id="nf-source" placeholder="例如：香港食物安全中心"></div>
+        <div class="form-row"><label>原文鏈接（https://…）</label><input id="nf-sourceurl" placeholder="https://"></div>
+      </div>
+      <div class="form-row"><label>摘要 *</label><textarea id="nf-summary" style="min-height:80px;"></textarea></div>
+      <div class="form-row"><label>全文內容</label><textarea id="nf-content"></textarea></div>
+      <button class="btn" onclick="saveNews()">儲存發佈</button>
+      <button class="btn btn-grey" onclick="clearNewsForm()">清空</button>
+    </div>
+
+    <!-- 資訊列表 -->
+    <div class="card tab-pane" id="tab-news-list" style="display:none;">
+      <h2>資訊管理（可編輯或刪除）</h2>
+      <div id="news-admin-list"></div>
+    </div>
+
+    <!-- 分析表單 -->
+    <div class="card tab-pane" id="tab-analysis-form" style="display:none;">
+      <h2 id="analysis-form-title">發佈分析文章</h2>
+      <input type="hidden" id="af-id">
+      <div class="grid grid-2">
+        <div class="form-row"><label>標題 *</label><input id="af-title"></div>
+        <div class="form-row"><label>日期 *</label><input type="date" id="af-date"></div>
+        <div class="form-row"><label>事件類型 *</label><select id="af-type"></select></div>
+        <div class="form-row"><label>關聯資訊（分析將顯示於該資訊下方）</label><select id="af-newsid"></select></div>
+      </div>
+      <div class="form-row"><label>摘要 *</label><textarea id="af-summary" style="min-height:80px;"></textarea></div>
+      <div class="form-row"><label>影響評估 *</label><textarea id="af-impact" style="min-height:80px;"></textarea></div>
+      <div class="form-row"><label>全文內容</label><textarea id="af-content"></textarea></div>
+      <button class="btn" onclick="saveAnalysis()">儲存發佈</button>
+      <button class="btn btn-grey" onclick="clearAnalysisForm()">清空</button>
+    </div>
+
+    <!-- 分析列表 -->
+    <div class="card tab-pane" id="tab-analysis-list" style="display:none;">
+      <h2>分析文章管理</h2>
+      <div id="analysis-admin-list"></div>
+    </div>
+
+    <!-- 分類管理 -->
+    <div class="card tab-pane" id="tab-cats" style="display:none;">
+      <h2>資訊分類管理</h2>
+      <div id="cat-admin-list" style="margin-bottom:16px;"></div>
+      <div class="filter-bar">
+        <div class="search-box"><input id="new-cat" placeholder="新增分類名稱"></div>
+        <button class="btn" onclick="addCat()">新增分類</button>
+      </div>
+      <h2 style="margin-top:24px;">分析事件類型管理</h2>
+      <div id="type-admin-list" style="margin-bottom:16px;"></div>
+      <div class="filter-bar">
+        <div class="search-box"><input id="new-type" placeholder="新增事件類型"></div>
+        <button class="btn" onclick="addType()">新增類型</button>
+      </div>
+    </div>
+
+    <!-- 活豬數據 -->
+    <div class="card tab-pane" id="tab-pig" style="display:none;">
+      <h2>活豬數據管理</h2>
+      <p style="font-size:.85rem;color:#666;margin-bottom:14px;">
+        正式運作時由 <code>scraper/fetch_pigs.py</code> 每日自動從食環署網站更新；此處供管理員手動補錄或修正。
+      </p>
+      <div class="grid grid-3">
+        <div class="form-row"><label>日期 *</label><input type="date" id="pf-date"></div>
+        <div class="form-row"><label>內地進口（頭）</label><input type="number" id="pf-mainland"></div>
+        <div class="form-row"><label>本地（頭）</label><input type="number" id="pf-local"></div>
+        <div class="form-row"><label>最高價（每擔）</label><input type="number" id="pf-high"></div>
+        <div class="form-row"><label>最低價（每擔）</label><input type="number" id="pf-low"></div>
+        <div class="form-row"><label>平均價（每擔）*</label><input type="number" id="pf-avg"></div>
+      </div>
+      <button class="btn" onclick="savePigRow()">儲存數據</button>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" id="site-footer"></footer>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

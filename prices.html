@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日活豬數據｜港滙肉訊</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="site-header"></header>
+
+<main class="container">
+  <h1 class="page-title">每日活豬數據</h1>
+  <p class="page-sub">數據來源：香港食物環境衞生署｜拍賣價以每擔（100斤）港元計｜最高價屬黑毛豬</p>
+
+  <div class="grid grid-2" style="margin-bottom:20px;">
+    <div class="card">
+      <h2>今日活豬供應及拍賣價</h2>
+      <div class="stat-row" style="grid-template-columns:1fr 1fr;" id="today-stats"></div>
+      <p style="margin-top:10px;font-size:.85rem;color:#666;" id="today-note"></p>
+    </div>
+    <div class="card">
+      <h2>明日活豬預計供應</h2>
+      <div class="stat-row" style="grid-template-columns:1fr 1fr 1fr;" id="forecast-stats"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px;">
+    <h2>拍賣均價走勢</h2>
+    <div class="filter-bar" id="range-bar">
+      <button class="chip" data-days="7">近7日</button>
+      <button class="chip on" data-days="30">近30日</button>
+      <button class="chip" data-days="60">近60日</button>
+    </div>
+    <div class="chart-box"><div id="chart"></div></div>
+    <div class="chart-legend">
+      <span class="legend-avg">拍賣均價（每擔）</span>
+      <span class="legend-high">最高價</span>
+      <span class="legend-low">最低價</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>歷史數據查詢</h2>
+    <div class="filter-bar">
+      <div class="search-box">
+        <input type="text" id="q-date" placeholder="輸入日期搜尋，例如 25/08/2026 或 08/2026">
+        <button class="btn" onclick="renderTable()">搜尋</button>
+      </div>
+      <button class="btn btn-grey" onclick="resetTable()">顯示全部</button>
+    </div>
+    <div class="table-wrap">
+      <table class="data">
+        <thead>
+          <tr>
+            <th>日期</th><th>內地進口（頭）</th><th>本地（頭）</th><th>總數（頭）</th>
+            <th>最高價</th><th>最低價</th><th>平均價</th><th>均價升跌</th>
+          </tr>
+        </thead>
+        <tbody id="history-body"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" id="site-footer"></footer>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script src="js/prices.js"></script>
+</body>
+</html>

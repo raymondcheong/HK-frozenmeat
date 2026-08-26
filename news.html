@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>行業資訊｜港滙肉訊</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="site-header"></header>
+
+<main class="container">
+  <h1 class="page-title">行業資訊</h1>
+  <p class="page-sub">匯集內地及國際市場凍肉、水產最新消息，按分類瀏覽或輸入關鍵字搜尋</p>
+
+  <div class="filter-bar">
+    <div class="search-box">
+      <input type="text" id="q" placeholder="搜尋關鍵字，例如：雞翼、關稅、三文魚、巴西…">
+      <button class="btn" id="btn-search">搜尋</button>
+    </div>
+  </div>
+  <div class="filter-bar" id="cat-bar"></div>
+  <p id="result-count" style="font-size:.85rem;color:#666;margin-bottom:12px;"></p>
+  <div id="news-list"></div>
+</main>
+
+<footer class="footer" id="site-footer"></footer>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script src="js/news.js"></script>
+</body>
+</html>

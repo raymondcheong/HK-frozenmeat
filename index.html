@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>港滙肉訊｜香港凍肉・水產行業資訊平台</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="site-header"></header>
+
+<main class="container">
+  <!-- 今日活豬速覽 -->
+  <h1 class="page-title">今日活豬行情速覽</h1>
+  <div class="card" style="margin-bottom:24px;">
+    <div class="stat-row" id="home-stats"></div>
+    <p style="margin-top:12px;font-size:.85rem;color:#666;">
+      數據來源：食物環境衞生署｜<span id="home-date"></span>　
+      <a href="prices.html"><strong>查看走勢圖及歷史數據 →</strong></a>
+    </p>
+  </div>
+
+  <div class="grid grid-2">
+    <!-- 最新資訊 -->
+    <div class="card">
+      <h2>最新行業資訊　<a href="news.html" style="font-size:.8rem;float:right;">全部資訊 →</a></h2>
+      <div id="home-news"></div>
+    </div>
+    <!-- 最新分析 -->
+    <div class="card">
+      <h2>市場影響分析　<a href="news.html" style="font-size:.8rem;float:right;">於行業資訊內查看 →</a></h2>
+      <div id="home-analysis"></div>
+    </div>
+  </div>
+
+  <!-- 服務對象說明 -->
+  <div class="grid grid-3" style="margin-top:24px;">
+    <div class="card" style="text-align:center;">
+      <h2 style="border:none;">肉檔檔主</h2>
+      <p style="font-size:.9rem;">每日朝早睇活豬拍賣價，掌握入貨成本，鮮肉凍肉靈活調配。</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h2 style="border:none;">凍肉貿易商</h2>
+      <p style="font-size:.9rem;">緊貼內地及國際關稅、檢疫政策變化，部署採購及轉口策略。</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h2 style="border:none;">水產批發零售</h2>
+      <p style="font-size:.9rem;">掌握急凍水產價格行情與供應動態，提前鎖定節日貨源。</p>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" id="site-footer"></footer>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
