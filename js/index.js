@@ -34,7 +34,7 @@ document.getElementById("home-news").innerHTML = Store.getNews().slice(0, 5).map
 
 /* 最新 3 篇分析 */
 document.getElementById("home-analysis").innerHTML = Store.getAnalysis().slice(0, 3).map(function (a) {
-  return '<a class="news-item" href="news.html" style="padding:12px 14px;margin-bottom:10px;border-left:6px solid #d4a017;">' +
+  return '<a class="news-item" href="news.html" style="padding:12px 14px;margin-bottom:10px;border-left:6px solid #0e6ba8;">' +
     '<div class="meta"><span class="badge badge-gold">' + a.type + "</span><span>" + Store.fmtDate(a.date) + "</span></div>" +
     "<h3 style='font-size:.95rem;'>" + a.title + "</h3>" +
     "<p style='font-size:.8rem;'>" + a.summary + "</p></a>";

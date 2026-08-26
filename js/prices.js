@@ -64,7 +64,7 @@ function renderChart() {
   var step = (max - min) / 5;
   for (var g = 0; g <= 5; g++) {
     var v = min + step * g;
-    grid += '<line x1="' + padL + '" y1="' + y(v) + '" x2="' + (W - padR) + '" y2="' + y(v) + '" stroke="#e5dccb" stroke-width="1"/>' +
+    grid += '<line x1="' + padL + '" y1="' + y(v) + '" x2="' + (W - padR) + '" y2="' + y(v) + '" stroke="#d4e4ef" stroke-width="1"/>' +
       '<text x="' + (padL - 10) + '" y="' + (y(v) + 6) + '" text-anchor="end" font-size="16" fill="#666">$' + Math.round(v) + "</text>";
   }
   var labels = "";
@@ -76,15 +76,15 @@ function renderChart() {
     }
   });
   var dots = rows.map(function (r, i) {
-    return '<circle cx="' + x(i) + '" cy="' + y(r.avg) + '" r="4" fill="#c8102e"><title>' +
+    return '<circle cx="' + x(i) + '" cy="' + y(r.avg) + '" r="4" fill="#0e6ba8"><title>' +
       Store.fmtDate(r.date) + " 均價 $" + r.avg + "（高 $" + r.high + "／低 $" + r.low + "）</title></circle>";
   }).join("");
 
   document.getElementById("chart").innerHTML =
     '<svg viewBox="0 0 ' + W + " " + H + '" width="100%" role="img" aria-label="拍賣均價走勢圖">' + grid +
-    '<path d="' + path("high") + '" fill="none" stroke="#999" stroke-width="2" stroke-dasharray="6,4"/>' +
-    '<path d="' + path("low") + '" fill="none" stroke="#bbb" stroke-width="2" stroke-dasharray="6,4"/>' +
-    '<path d="' + path("avg") + '" fill="none" stroke="#c8102e" stroke-width="4" stroke-linejoin="round"/>' +
+    '<path d="' + path("high") + '" fill="none" stroke="#9db8c9" stroke-width="2" stroke-dasharray="6,4"/>' +
+    '<path d="' + path("low") + '" fill="none" stroke="#c3d5e2" stroke-width="2" stroke-dasharray="6,4"/>' +
+    '<path d="' + path("avg") + '" fill="none" stroke="#0e6ba8" stroke-width="4" stroke-linejoin="round"/>' +
     labels + dots + "</svg>";
 }
 

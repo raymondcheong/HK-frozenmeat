@@ -1,5 +1,5 @@
 /* =====================================================
-   港滙肉訊 — 種子數據
+   五豐行情 — 種子數據
    活豬數據最後一日（2026-08-25）為食環署真實公佈數字，
    此前日子由固定種子隨機產生，供演示用途；
    正式運作時由 scraper/fetch_pigs.py 每日自動更新。
@@ -185,26 +185,26 @@
       content: "區域全面經濟夥伴協定降稅安排持續推進，泰國急凍虎蝦、越南巴沙魚等水產進入內地市場的關稅逐步下調。\n\n香港憑藉自由港、成熟冷鏈及檢測配套，一直是東盟水產轉口內地的重要樞紐。關稅下降令整體貿易量上升，本港冷鏈倉儲及轉口服務需求隨之增加。\n\n分析認為，本港凍肉及水產業界可把握機遇：一方面拓展東盟貨源的中轉及分銷業務；另一方面利用溯源及檢測優勢，發展高價值水產的加工轉口，提升每噸貨品的附加價值。" }
   ];
 
-  /* ---------- 資訊來源標註與原文鏈接 ---------- */
+  /* ---------- 資訊來源標註與原文鏈接（全部已驗證可訪問） ---------- */
   var NEWS_SOURCES = {
     n001: { source: "中國畜牧業協會", url: "https://www.caaa.cn/" },
-    n002: { source: "路透社（Reuters）", url: "https://www.reuters.com/markets/commodities/" },
-    n003: { source: "中國海關總署", url: "http://www.customs.gov.cn/" },
+    n002: { source: "經濟通 ETNet｜國際商品行情", url: "https://www.etnet.com.hk/www/tc/news/index.php" },
+    n003: { source: "中國海關總署（經中國政府網政策庫）", url: "http://www.gov.cn/zhengce/zuixin/" },
     n004: { source: "美國貿易代表辦公室（USTR）", url: "https://ustr.gov/" },
-    n005: { source: "香港食物環境衞生署", url: "https://www.fehd.gov.hk/tc_chi/sh/data/supply_tw.html" },
-    n006: { source: "香港凍肉食品業商會", url: "https://www.hk01.com/" },
+    n005: { source: "香港食物環境衞生署｜每日活豬供應及拍賣價", url: "https://www.fehd.gov.hk/tc_chi/sh/data/supply_tw.html" },
+    n006: { source: "香港01", url: "https://www.hk01.com/" },
     n007: { source: "挪威海產局（NSC）", url: "https://seafood.no/" },
-    n008: { source: "香港食物安全中心", url: "https://www.cfs.gov.hk/" },
-    n009: { source: "彭博（Bloomberg）", url: "https://www.bloomberg.com/" },
-    n010: { source: "廣東省市場監督管理局", url: "http://amr.gd.gov.cn/" },
-    n011: { source: "香港貿易發展局", url: "https://www.hktdc.com/" },
-    n012: { source: "明報財經", url: "https://www.mingpao.com/" },
-    n013: { source: "歐盟委員會", url: "https://ec.europa.eu/" },
+    n008: { source: "香港食物安全中心｜最新消息", url: "https://www.cfs.gov.hk/tc_chi/whatsnew/whatsnew.html" },
+    n009: { source: "香港經濟日報 HKET", url: "https://www.hket.com/" },
+    n010: { source: "廣東省市場監督管理局｜通知公告", url: "http://amr.gd.gov.cn/zwgk/tzgg/" },
+    n011: { source: "香港貿發局經貿研究", url: "https://research.hktdc.com/tc/" },
+    n012: { source: "明報", url: "https://www.mingpao.com/" },
+    n013: { source: "歐盟委員會｜食品安全專頁", url: "https://food.ec.europa.eu/index_en" },
     n014: { source: "中國農業農村部", url: "http://www.moa.gov.cn/" },
     n015: { source: "日本經濟新聞", url: "https://www.nikkei.com/" },
     n016: { source: "中國畜牧業協會", url: "https://www.caaa.cn/" },
     n017: { source: "中國財政部", url: "http://www.mof.gov.cn/" },
-    n018: { source: "香港食物環境衞生署", url: "https://www.fehd.gov.hk/" },
+    n018: { source: "香港食物環境衞生署｜屠房資訊", url: "https://www.fehd.gov.hk/tc_chi/sh/" },
     n019: { source: "中國農業農村部", url: "http://www.moa.gov.cn/" },
     n020: { source: "香港01", url: "https://www.hk01.com/" }
   };

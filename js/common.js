@@ -1,5 +1,5 @@
 /* =====================================================
-   港滙肉訊 — 公共腳本
+   五豐行情 — 公共腳本
    負責：頁首頁尾渲染、資料存取層（種子數據 + 後台修改合併）
    ===================================================== */
 
@@ -86,15 +86,17 @@ function renderChrome(active) {
 
   document.getElementById("site-header").innerHTML =
     '<div class="topbar"><div class="topbar-inner">' +
-    '<a class="logo" href="index.html"><span class="mark">肉</span>港滙肉訊</a>' +
+    '<a class="logo" href="index.html"><span class="mark">' +
+    '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M4 6l16 12M20 6L4 18M12 6l-3-2M12 6l3-2M12 18l-3 2M12 18l3 2"/></svg>' +
+    '</span><span class="logo-text">五豐行情<small>五豐行 NG FUNG HONG</small></span></a>' +
     '<span class="tagline">香港凍肉・水產行業資訊平台｜服務肉檔檔主及凍肉貿易商</span>' +
     "</div></div>" +
     '<nav class="navbar"><div class="navbar-inner">' + nav + "</div></nav>";
 
   document.getElementById("site-footer").innerHTML =
     '<div class="footer-inner">' +
-    "<p><strong>港滙肉訊</strong>｜每日活豬數據來源：<a href='https://www.fehd.gov.hk/tc_chi/sh/data/supply_tw.html' target='_blank'>香港食物環境衞生署</a></p>" +
-    "<p>行業資訊僅供同業參考，入市前請自行核實。查詢及投稿：editor@hkmeatnews.hk（示例）</p>" +
+    "<p><strong>五豐行情</strong>（五豐行旗下資訊平台）｜每日活豬數據來源：<a href='https://www.fehd.gov.hk/tc_chi/sh/data/supply_tw.html' target='_blank'>香港食物環境衞生署</a></p>" +
+    '<p>訂貨詳情請聯繫：WhatsApp：<a href="https://wa.me/8618825146113" target="_blank" rel="noopener">+86 18825146113</a>｜郵件：<a href="mailto:zhangkailiang12@nfh.hk">zhangkailiang12@nfh.hk</a></p>' +
     '<p class="disclaimer">免責聲明：本網站所載資料按「現狀」提供，僅作一般參考用途，並不構成任何投資或採購建議。活豬拍賣價以食物環境衞生署公佈為準。</p>' +
     "</div>";
 }
