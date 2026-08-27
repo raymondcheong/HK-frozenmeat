@@ -282,6 +282,20 @@ table.data tr:hover td { background: var(--line-soft); }
 .related-analysis .analysis-body { border-top-style: dashed; }
 .related-analysis.open .analysis-body { display: block; }
 
+/* ---------- 新聞來源清單 ---------- */
+.src-region { margin-bottom: 18px; }
+.src-region h3 {
+  font-size: 1rem; color: var(--ice-deep);
+  border-left: 5px solid var(--frost); padding-left: 10px; margin-bottom: 10px;
+}
+.src-item {
+  background: var(--snow); border: 1px solid var(--line);
+  border-radius: 8px; padding: 12px 16px; margin-bottom: 10px;
+}
+.src-name { font-weight: 800; font-size: .98rem; margin-bottom: 6px; }
+.src-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.src-fields { font-size: .82rem; color: var(--ink-soft); }
+
 /* ---------- 頁尾（深海藍） ---------- */
 .footer {
   background: linear-gradient(180deg, var(--ice-dark) 0%, #042740 100%);

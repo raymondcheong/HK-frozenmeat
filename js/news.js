@@ -96,3 +96,34 @@ document.getElementById("q").addEventListener("keydown", function (e) {
 
 renderCatBar();
 renderList();
+
+/* ---------- 新聞來源清單（結構化渲染） ---------- */
+(function () {
+  if (!window.NEWS_SOURCE_REGISTRY) return;
+  var REGIONS = ["香港", "中國內地", "南美洲", "北美洲", "歐洲"];
+  var body = document.getElementById("sources-body");
+
+  body.innerHTML =
+    '<p style="font-size:.82rem;color:#666;margin-bottom:14px;">每日采編任務按此清單選材。非中文來源已標示原文語言，引用時譯為繁體中文並註明原始出處。</p>' +
+    REGIONS.map(function (r) {
+      var items = NEWS_SOURCE_REGISTRY.filter(function (s) { return s.region === r; });
+      if (!items.length) return "";
+      return '<div class="src-region"><h3>' + r + '</h3>' +
+        items.map(function (s) {
+          return '<div class="src-item">' +
+            '<div class="src-name"><a href="' + s.url + '" target="_blank" rel="noopener noreferrer">' + s.name + " ↗</a>" +
+            (s.status === "new" ? '<span class="badge badge-green" style="margin-left:8px;">新增</span>' : "") + "</div>" +
+            '<div class="src-meta">' +
+            '<span class="badge badge-blue">' + s.tier + "</span>" +
+            '<span class="badge badge-grey">' + s.language + "</span>" +
+            '<span class="badge badge-gold">' + s.freq + "</span></div>" +
+            '<div class="src-fields">' + s.fields + "</div></div>";
+        }).join("") + "</div>";
+    }).join("");
+
+  document.getElementById("sources-toggle").addEventListener("click", function () {
+    var open = body.style.display !== "none";
+    body.style.display = open ? "none" : "block";
+    document.getElementById("sources-arrow").textContent = open ? "展開 ▼" : "收起 ▲";
+  });
+})();

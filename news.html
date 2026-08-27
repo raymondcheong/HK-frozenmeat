@@ -22,10 +22,17 @@
   <div class="filter-bar" id="cat-bar"></div>
   <p id="result-count" style="font-size:.85rem;color:#666;margin-bottom:12px;"></p>
   <div id="news-list"></div>
+
+  <!-- 新聞來源清單 -->
+  <div class="card" id="sources-card" style="margin-top:30px;">
+    <h2 id="sources-toggle" style="cursor:pointer;">新聞來源清單（含國際來源）　<span id="sources-arrow" style="float:right;font-size:.9rem;color:var(--ice);">展開 ▼</span></h2>
+    <div id="sources-body" style="display:none;"></div>
+  </div>
 </main>
 
 <footer class="footer" id="site-footer"></footer>
 <script src="js/data.js"></script>
+<script src="js/sources.js"></script>
 <script src="js/common.js"></script>
 <script src="js/news.js"></script>
 </body>
