@@ -67,6 +67,8 @@ window.NEWS_SOURCE_REGISTRY = [
     region: "歐洲", language: "英文", fields: "歐洲及全球肉類行業新聞・市場趨勢", freq: "每日", tier: "權威媒體", status: "new" },
   { id: "globefish", name: "FAO GLOBEFISH（聯合國糧農組織）", url: "https://www.fao.org/in-action/globefish/en/",
     region: "歐洲", language: "英文", fields: "全球漁業水產貿易分析・魚價報告", freq: "每月／每季", tier: "官方機構", status: "new" },
+  { id: "ucn", name: "Undercurrent News（UCN）", url: "https://www.undercurrentnews.com/",
+    region: "歐洲", language: "英文", fields: "全球海產價格・貿易數據・漁業展會報導（部分付費）", freq: "每日", tier: "權威媒體", status: "new" },
   { id: "intrafish", name: "IntraFish", url: "https://www.intrafish.com/",
     region: "歐洲", language: "英文", fields: "全球海產貿易・三文魚蝦類行情（部分付費）", freq: "每日", tier: "權威媒體", status: "new" }
 ];
