@@ -47,12 +47,17 @@ document.querySelector(".admin-tabs").addEventListener("click", function (e) {
 });
 
 /* ---------- 初始化 ---------- */
+function localToday() {
+  var d = new Date();
+  var m = String(d.getMonth() + 1), day = String(d.getDate());
+  return d.getFullYear() + "-" + (m.length < 2 ? "0" + m : m) + "-" + (day.length < 2 ? "0" + day : day);
+}
 function initPanel() {
   fillSelects();
   renderNewsAdmin();
   renderAnalysisAdmin();
   renderCats();
-  var today = new Date().toISOString().slice(0, 10);
+  var today = localToday();
   ["nf-date", "af-date", "pf-date"].forEach(function (id) { if (!$(id).value) $(id).value = today; });
 }
 function fillSelects() {
@@ -120,11 +125,25 @@ function delNews(id) {
   notice("資訊已刪除。");
 }
 function renderNewsAdmin() {
+  var c = Store._custom();
+  var hidden = (c.deletedNews || []).length;
   $("news-admin-list").innerHTML = Store.getNews().map(function (n) {
     return '<div class="admin-list-item"><div><strong>' + Store.fmtDate(n.date) + "</strong>｜[" + n.category + "] " + n.title + "</div>" +
       '<div><button class="btn btn-sm btn-gold" onclick="editNews(\'' + n.id + "')\">編輯</button> " +
       '<button class="btn btn-sm btn-grey" onclick="delNews(\'' + n.id + "')\">刪除</button></div></div>";
-  }).join("");
+  }).join("") +
+  (hidden ? '<p style="font-size:.85rem;color:#8a5a00;margin-top:12px;">注意：此瀏覽器已在本機隱藏 ' + hidden + ' 則資訊（前台於此瀏覽器不顯示）。如需恢復，請按上方「重置本機修改」。</p>' : "");
+}
+
+/* ---------- 重置本機修改 ---------- */
+function resetLocalChanges() {
+  if (!confirm("確定清除此瀏覽器上的全部本機修改（本機新增／編輯／刪除）？\n網站原有內容將全部恢復顯示。")) return;
+  localStorage.removeItem(Store.KEY);
+  fillSelects();
+  renderNewsAdmin();
+  renderAnalysisAdmin();
+  renderCats();
+  notice("已重置本機修改，前台於此瀏覽器已恢復顯示全部內容。");
 }
 
 /* ---------- 分析 CRUD ---------- */

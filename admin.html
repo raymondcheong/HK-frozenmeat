@@ -35,6 +35,10 @@
       <button class="btn-grey" style="margin-left:auto;" onclick="doLogout()">登出</button>
     </div>
     <div class="notice" id="admin-notice" style="display:none;"></div>
+    <p style="font-size:.85rem;color:#8a5a00;background:#fff7e6;border:1px solid #f0c36d;padding:10px 14px;border-radius:6px;margin:0 0 16px;">
+      提示：此後台為本機示範 CMS，所有新增／編輯／刪除只儲存在<strong>目前這個瀏覽器</strong>（localStorage），不會上傳伺服器，且會令此瀏覽器的前台頁面隱藏已刪除的內容。如前台資訊異常偏少或消失，請按右方按鈕恢復。
+      <button class="btn btn-grey btn-sm" style="margin-left:10px;" onclick="resetLocalChanges()">重置本機修改</button>
+    </p>
 
     <!-- 資訊表單 -->
     <div class="card tab-pane" id="tab-news-form">

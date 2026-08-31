@@ -19,7 +19,7 @@ var Store = {
   getNews: function () {
     var c = this._custom();
     var base = (SITE_DATA.news || []).filter(function (n) {
-      return !(c.deletedNews || []).includes(n.id);
+      return (c.deletedNews || []).indexOf(n.id) < 0;
     });
     var edited = base.map(function (n) {
       return (c.editedNews && c.editedNews[n.id]) ? Object.assign({}, n, c.editedNews[n.id]) : n;
@@ -32,7 +32,7 @@ var Store = {
   getAnalysis: function () {
     var c = this._custom();
     var base = (SITE_DATA.analysis || []).filter(function (a) {
-      return !(c.deletedAnalysis || []).includes(a.id);
+      return (c.deletedAnalysis || []).indexOf(a.id) < 0;
     });
     var edited = base.map(function (a) {
       return (c.editedAnalysis && c.editedAnalysis[a.id]) ? Object.assign({}, a, c.editedAnalysis[a.id]) : a;
