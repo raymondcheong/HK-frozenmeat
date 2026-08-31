@@ -40,5 +40,38 @@
       "local": 100,
       "total": 2916
     }
+  },
+  {
+    "date": "2026-08-28",
+    "mainland": 3005,
+    "local": 315,
+    "total": 3320,
+    "high": 1650,
+    "low": 950,
+    "avg": 1052,
+    "note": "食環署標註：資料曾被修訂。"
+  },
+  {
+    "date": "2026-08-29",
+    "mainland": 3194,
+    "local": 132,
+    "total": 3326,
+    "high": 1650,
+    "low": 850,
+    "avg": 1030
+  },
+  {
+    "date": "2026-08-30",
+    "mainland": 3681,
+    "local": 160,
+    "total": 3841,
+    "high": 1650,
+    "low": 850,
+    "avg": 1030,
+    "forecast": {
+      "mainland": 2940,
+      "local": 100,
+      "total": 3040
+    }
   }
 ]
