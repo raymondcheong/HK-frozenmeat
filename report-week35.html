@@ -8045,5 +8045,173 @@ var residualAttrSubcatChartDom = document.getElementById('residualAttrSubcatChar
       wirePdfLayoutControls();
     })();
   </script>
+
+<!-- ============ 編輯保存小工具 v1（localStorage 持久化） ============ -->
+<style id="esb-style">
+  #editSaveBar{position:fixed;right:14px;bottom:14px;z-index:99999;display:flex;align-items:center;gap:8px;
+    background:rgba(10,14,23,.92);border:1px solid rgba(0,255,245,.35);border-radius:10px;
+    padding:8px 10px;font-family:inherit;box-shadow:0 4px 18px rgba(0,0,0,.45);}
+  #editSaveBar button{cursor:pointer;border-radius:6px;border:1px solid rgba(0,255,245,.4);
+    background:rgba(15,23,42,.9);color:#e2e8f0;font-size:.82rem;padding:5px 10px;line-height:1.2;}
+  #editSaveBar button:hover{background:rgba(0,255,245,.15);}
+  #editSaveBar button.esb-primary{background:#0891b2;border-color:#00fff5;color:#fff;font-weight:700;}
+  #editSaveBar button.esb-danger{border-color:rgba(239,68,68,.6);color:#fca5a5;}
+  #editSaveBar .esb-status{font-size:.75rem;color:rgba(226,232,240,.65);max-width:180px;}
+  body.esb-on #reportContent [data-edit-id]{outline:1px dashed rgba(0,255,245,.35);outline-offset:2px;cursor:text;}
+  body.esb-on #reportContent [data-edit-id]:hover{outline-color:rgba(0,255,245,.85);background:rgba(0,255,245,.05);}
+  #esb-toast{position:fixed;left:50%;bottom:70px;transform:translateX(-50%);z-index:999999;
+    padding:9px 18px;border-radius:8px;font-size:.9rem;color:#fff;opacity:0;transition:opacity .25s;pointer-events:none;
+    background:rgba(16,185,129,.95);box-shadow:0 4px 14px rgba(0,0,0,.4);}
+  #esb-toast.esb-err{background:rgba(239,68,68,.95);}
+  #esb-toast.esb-show{opacity:1;}
+  @media (max-width:640px){#editSaveBar{right:8px;bottom:8px;padding:6px 8px;gap:5px;}
+    #editSaveBar button{font-size:.75rem;padding:4px 7px;}#editSaveBar .esb-status{display:none;}}
+</style>
+<div id="editSaveBar" role="toolbar" aria-label="編輯保存工具">
+  <button type="button" id="esbToggle">✏️ 編輯：關</button>
+  <button type="button" id="esbSave" class="esb-primary">💾 保存</button>
+  <button type="button" id="esbReset" class="esb-danger">↺ 還原預設</button>
+  <span class="esb-status" id="esbStatus"></span>
+</div>
+<div id="esb-toast"></div>
+<script>
+(function () {
+  "use strict";
+  var STORE_KEY = "reportW35.edits.v1";
+  var META_KEY = "reportW35.edits.meta";
+  var LEGACY_KEYS = ["promotion25_report_draft", "promotion24_report_draft"];
+  var MAX_BLOCK = 500000; /* 單區塊大小上限（防異常超大內容） */
+  var editing = false;
+
+  function $(s) { return document.querySelector(s); }
+  function $all(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
+
+  /* ---- 儲存可用性（無痕模式/禁用時降級） ---- */
+  function storageOk() {
+    try { var k = "__esb" + Date.now(); localStorage.setItem(k, "1"); localStorage.removeItem(k); return true; }
+    catch (e) { return false; }
+  }
+  var CAN_SAVE = storageOk();
+
+  /* ---- 可編輯區塊：以文件順序賦予穩定 id ---- */
+  function blocks() { return $all("#reportContent [contenteditable], #reportContent .editable"); }
+  function assignIds() {
+    blocks().forEach(function (el, i) {
+      if (!el.getAttribute("data-edit-id")) el.setAttribute("data-edit-id", "ed-" + i);
+      el.setAttribute("contenteditable", editing ? "true" : "false");
+    });
+  }
+
+  /* ---- 視覺回饋 ---- */
+  var toastTimer = null;
+  function toast(msg, ok) {
+    var t = $("#esb-toast"); if (!t) return;
+    t.textContent = msg;
+    t.className = ok === false ? "esb-err esb-show" : "esb-show";
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.className = ok === false ? "esb-err" : ""; }, 2600);
+  }
+  function setStatus(msg) { var s = $("#esbStatus"); if (s) s.textContent = msg; }
+  function updateMeta() {
+    if (!CAN_SAVE) { setStatus("本地儲存不可用"); return; }
+    try {
+      var m = JSON.parse(localStorage.getItem(META_KEY) || "null");
+      if (m && m.savedAt) {
+        var d = new Date(m.savedAt);
+        setStatus("上次保存 " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2) + ":" + ("0" + d.getSeconds()).slice(-2) + "（" + m.count + " 區塊）");
+        return;
+      }
+    } catch (e) {}
+    setStatus("尚未保存修改");
+  }
+
+  /* ---- 保存（全部可編輯區塊，分別識別） ---- */
+  function save(showToast) {
+    if (!CAN_SAVE) { toast("瀏覽器不支援本地儲存（或處於無痕模式），修改無法保存", false); return false; }
+    var edits = {};
+    $all("[data-edit-id]").forEach(function (el) {
+      var h = el.innerHTML;
+      if (typeof h === "string" && h.length > 0 && h.length < MAX_BLOCK) edits[el.getAttribute("data-edit-id")] = h;
+    });
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({ v: 1, edits: edits }));
+      localStorage.setItem(META_KEY, JSON.stringify({ savedAt: new Date().toISOString(), count: Object.keys(edits).length }));
+      if (showToast !== false) toast("✓ 已保存 " + Object.keys(edits).length + " 個區塊的內容", true);
+      updateMeta();
+      return true;
+    } catch (e) {
+      toast("保存失敗：瀏覽器儲存空間不足", false);
+      return false;
+    }
+  }
+
+  /* ---- 載入還原（含資料校驗，損毀資料自動丟棄） ---- */
+  function loadSaved() {
+    if (!CAN_SAVE) return 0;
+    var raw;
+    try { raw = localStorage.getItem(STORE_KEY); } catch (e) { return 0; }
+    if (!raw) return 0;
+    var data;
+    try { data = JSON.parse(raw); }
+    catch (e) { try { localStorage.removeItem(STORE_KEY); } catch (e2) {} return 0; }
+    if (!data || typeof data !== "object" || !data.edits || typeof data.edits !== "object") return 0;
+    var applied = 0;
+    Object.keys(data.edits).forEach(function (id) {
+      if (!/^ed-\d+$/.test(id)) return; /* 只接受合法 id，防注入 */
+      var el = document.querySelector('[data-edit-id="' + id + '"]');
+      var val = data.edits[id];
+      if (el && typeof val === "string" && val.length < MAX_BLOCK) { el.innerHTML = val; applied++; }
+    });
+    return applied;
+  }
+
+  /* ---- 還原預設：清除本機全部草稿後重載（模板快照即為預設內容） ---- */
+  function resetAll() {
+    if (!window.confirm("確定還原為預設內容？\n你在本機保存的所有修改將被清除。")) return;
+    try { localStorage.removeItem(STORE_KEY); localStorage.removeItem(META_KEY); } catch (e) {}
+    LEGACY_KEYS.forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+    toast("已清除本機修改，正在還原預設內容…", true);
+    setTimeout(function () { location.reload(); }, 600);
+  }
+
+  /* ---- 編輯模式切換 ---- */
+  function setEditing(on) {
+    editing = on;
+    document.body.classList.toggle("esb-on", on);
+    assignIds();
+    var b = $("#esbToggle");
+    if (b) b.textContent = on ? "✏️ 編輯：開" : "✏️ 編輯：關";
+    if (on) toast("編輯模式已開啟：點擊虛線框內文字即可修改，將自動保存", true);
+  }
+
+  /* ---- 自動保存（輸入後 0.8 秒防抖） ---- */
+  var debounce = null;
+  document.addEventListener("input", function (e) {
+    if (!editing) return;
+    var t = e.target;
+    if (!t || !t.closest || !t.closest("[data-edit-id]")) return;
+    setStatus("編輯中…");
+    clearTimeout(debounce);
+    debounce = setTimeout(function () { if (save(false)) setStatus("已自動保存 " + new Date().toLocaleTimeString("zh-HK", { hour12: false })); }, 800);
+  }, true);
+
+  /* ---- 初始化 ---- */
+  function init() {
+    assignIds();
+    var applied = loadSaved();
+    updateMeta();
+    if (applied > 0) toast("已載入上次保存的 " + applied + " 處修改", true);
+    var tg = $("#esbToggle"), sv = $("#esbSave"), rs = $("#esbReset");
+    if (tg) tg.addEventListener("click", function () { setEditing(!editing); });
+    if (sv) sv.addEventListener("click", function () { save(true); });
+    if (rs) rs.addEventListener("click", resetAll);
+    if (!CAN_SAVE) setStatus("本地儲存不可用（無痕模式？）");
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>
+<!-- ============ /編輯保存小工具 ============ -->
+
 </body>
 </html>
