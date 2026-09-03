@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B端商城季度分析報告（2026年4–8月）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<style>
+  :root {
+    --primary:#0e7490; --primary-ink:#155e75; --accent:#d97706; --accent-ink:#92400e;
+    --ink:#16202e; --muted:#5b6b7f; --faint:#8b98a9;
+    --bg:#f5f7fa; --surface:#ffffff; --border:#e6e9ef;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(16,24,40,.05),0 8px 24px rgba(16,24,40,.06);
+    --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px; --s10:40px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Noto Sans TC','Microsoft JhengHei','PingFang TC',system-ui,sans-serif;
+         background:var(--bg); color:var(--ink); line-height:1.8; font-size:15px; }
+  .wrap { max-width:1060px; margin:0 auto; padding:var(--s6) var(--s5) 64px; }
+  header { background:linear-gradient(120deg,#123047 0%,#0e7490 100%); color:#fff;
+           border-radius:var(--radius); padding:clamp(24px,4vw,40px); margin-bottom:var(--s6);
+           box-shadow:var(--shadow); }
+  header h1 { font-size:clamp(1.35rem,3vw,1.75rem); font-weight:900; letter-spacing:.02em; }
+  header .sub { opacity:.85; margin-top:var(--s2); font-size:.92rem; line-height:1.7; }
+  .kpi-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:var(--s4); margin-bottom:var(--s6); }
+  .kpi { background:var(--surface); border-radius:var(--radius); padding:var(--s4) var(--s5);
+         box-shadow:var(--shadow); border-top:3px solid var(--primary); transition:transform .18s ease, box-shadow .18s ease; }
+  .kpi:hover { transform:translateY(-2px); box-shadow:0 4px 10px rgba(16,24,40,.08),0 14px 34px rgba(16,24,40,.1); }
+  .kpi.gold { border-top-color:var(--accent); }
+  .kpi .v { font-size:1.55rem; font-weight:900; letter-spacing:-.01em; }
+  .kpi .l { font-size:.8rem; color:var(--muted); margin-top:2px; line-height:1.5; }
+  section { background:var(--surface); border-radius:var(--radius); padding:clamp(18px,3vw,30px);
+           margin-bottom:var(--s6); box-shadow:var(--shadow); }
+  h2 { font-size:1.15rem; font-weight:900; color:var(--ink); display:flex; align-items:center; gap:var(--s3);
+       padding-bottom:var(--s3); border-bottom:1px solid var(--border); margin-bottom:var(--s4); }
+  h2 .num { color:var(--primary); font-size:1rem; }
+  h3 { font-size:.98rem; font-weight:700; color:var(--primary-ink); margin:var(--s5) 0 var(--s2); }
+  .badge { display:inline-flex; align-items:center; font-size:.72rem; font-weight:700; letter-spacing:.06em;
+           padding:3px 10px; border-radius:99px; }
+  .badge-all { background:#e0f2fe; color:#075985; border:1px solid #bae6fd; }
+  .badge-on { background:#fef3c7; color:#92400e; border:1px solid #fde68a; }
+  .purpose { background:#f0f9ff; border:1px solid #bae6fd; border-radius:10px;
+             padding:var(--s3) var(--s4); font-size:.86rem; color:#075985; margin-bottom:var(--s4); }
+  .tbl-wrap { overflow-x:auto; margin:var(--s2) 0 var(--s4); border:1px solid var(--border); border-radius:10px; }
+  .tbl { width:100%; border-collapse:collapse; font-size:.86rem; }
+  .tbl th { background:#f6f8fb; color:#3d4c63; padding:9px 12px; text-align:left; font-weight:700;
+            border-bottom:1px solid var(--border); white-space:nowrap; }
+  .tbl td { padding:8px 12px; border-bottom:1px solid #eef1f5; }
+  .tbl tr:last-child td { border-bottom:none; }
+  .tbl tr:hover td { background:#f8fbfd; }
+  .tbl .r { text-align:right; font-variant-numeric:tabular-nums; }
+  .chart { width:100%; height:370px; margin:var(--s2) 0; }
+  .chart-sm { height:330px; }
+  .note { font-size:.82rem; color:var(--faint); margin-top:var(--s2); }
+  .interp { margin-top:var(--s3); text-align:justify; color:#2b3a4e; }
+  .interp strong { color:var(--primary-ink); }
+  .callout { background:#fffbeb; border:1px solid #fde68a; border-left:4px solid var(--accent);
+             border-radius:10px; padding:var(--s3) var(--s4); margin:var(--s3) 0; font-size:.92rem; color:#78350f; }
+  .finding { background:#f8fafc; border:1px solid var(--border); border-left:4px solid var(--primary);
+             border-radius:10px; padding:var(--s3) var(--s4); margin:var(--s3) 0; }
+  .finding b { color:var(--primary-ink); }
+  footer { text-align:center; color:var(--faint); font-size:.8rem; margin-top:var(--s8); line-height:1.7; }
+  @media (max-width:640px) { .kpi .v { font-size:1.3rem; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>B端商城季度分析報告（2026年4–8月）</h1>
+  <p class="sub">整體凍肉下單（4–8月累計明細）× 線上自助下單（3–8月明細）｜<strong>數據範圍：僅「現貨銷售」，不含期貨、預訂等其他業務類型</strong>｜滲透率以傳統渠道為分母｜報告日期：2026-09-03</p>
+</header>
+
+<div class="kpi-row">
+  <div class="kpi gold"><div class="v">25.11%</div><div class="l">年度目標完成率<br>已完成 301.3萬 / 目標 1,200萬 港元（線上平台）</div></div>
+  <div class="kpi"><div class="v">1.32億</div><div class="l">整體季度 GMV<br>4–8月，25,014 單</div></div>
+  <div class="kpi"><div class="v">301.3萬</div><div class="l">線上自助下單 GMV<br>3–8月，1,334 單</div></div>
+  <div class="kpi"><div class="v">5.9%</div><div class="l">滲透率（單數）<br>線上 ÷ 傳統渠道</div></div>
+  <div class="kpi"><div class="v">3.1%</div><div class="l">滲透率（金額）<br>線上 ÷ 傳統渠道</div></div>
+  <div class="kpi"><div class="v">30.9%</div><div class="l">CR5 客戶集中度<br>399 家客戶</div></div>
+</div>
+
+<section>
+<h2><span class="num">〇</span>數據清洗與欄位結構說明</h2>
+<div class="purpose"><strong>數據源口徑聲明：</strong>本次分析數據源僅包含「現貨銷售」數據（整體源業務類型 100% 為 A_現貨銷售），不涵蓋期貨、預訂等其他業務類型；所有結論僅適用於現貨業務範圍。清洗重點：剔除表頭副行與完全重複行、統一狀態（已登記）、訂單號去重、日期與金額格式標準化；整體源 8 月數據的日期格式與 4–7 月不同（datetime vs 序數），已統一解析。滲透率自本期起改以<strong>傳統渠道</strong>為分母。</div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>處理項</th><th class="r">整體源（凍肉 4-8月.xlsm）</th><th class="r">線上源（自助下單 xlsx）</th></tr></thead><tbody><tr><td>原始明細行數</td><td class="r">35,494</td><td class="r">1,821</td></tr><tr><td>剔除表頭副行／完全重複行</td><td class="r">1 + 29 行</td><td class="r">374 行（同單號同金額）</td></tr><tr><td>狀態過濾</td><td class="r">僅保留「已登记」</td><td class="r">僅保留「已登记」</td></tr><tr><td>訂單去重鍵</td><td class="r">要货单号（金額按單加總）</td><td class="r">ERP 订单号（L 列整單金額取一次）</td></tr><tr><td>去重後訂單數</td><td class="r">25,014</td><td class="r">1,334</td></tr><tr><td>金額合計</td><td class="r">1.32億 港元</td><td class="r">301.3萬 港元</td></tr><tr><td>日期欄格式</td><td class="r">开单日期（4–7月為 Excel 序數、8月為 datetime，已統一）</td><td class="r">创建时间（字串→日期）</td></tr><tr><td>覆蓋期間</td><td class="r">2026-04-01 ～ 2026-08-31</td><td class="r">2026-03-03 ～ 2026-08-31</td></tr></tbody></table></div>
+<p class="note">口徑對齊：兩源對比取交集期間 2026年4–8月；訂單號在重疊窗口匹配率 99.2%（1187/1197 單），對齊可靠。</p>
+</section>
+
+<section>
+<h2><span class="num">一</span>季度整體業績走勢</h2>
+<h3><span class="badge badge-all">整體情況</span> 整體下單（全部渠道）</h3>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>月份</th><th class="r">單量</th><th class="r">GMV(港元)</th><th class="r">客單價</th></tr></thead><tbody><tr><td>2026-04</td><td class="r">4,826</td><td class="r">2,672.3萬</td><td class="r">5,537</td></tr><tr><td>2026-05</td><td class="r">4,641</td><td class="r">2,382.0萬</td><td class="r">5,132</td></tr><tr><td>2026-06</td><td class="r">4,955</td><td class="r">2,547.1萬</td><td class="r">5,141</td></tr><tr><td>2026-07</td><td class="r">5,317</td><td class="r">2,773.6萬</td><td class="r">5,217</td></tr><tr><td>2026-08</td><td class="r">5,275</td><td class="r">2,789.4萬</td><td class="r">5,288</td></tr></tbody></table></div>
+<h3><span class="badge badge-on">線上下單數據</span> 線上自助下單</h3>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>月份</th><th class="r">單量</th><th class="r">GMV(港元)</th><th class="r">客單價</th></tr></thead><tbody><tr><td>2026-03</td><td class="r">137</td><td class="r">29.3萬</td><td class="r">2,136</td></tr><tr><td>2026-04</td><td class="r">188</td><td class="r">38.9萬</td><td class="r">2,067</td></tr><tr><td>2026-05</td><td class="r">204</td><td class="r">46.3萬</td><td class="r">2,268</td></tr><tr><td>2026-06</td><td class="r">232</td><td class="r">59.5萬</td><td class="r">2,564</td></tr><tr><td>2026-07</td><td class="r">243</td><td class="r">64.3萬</td><td class="r">2,647</td></tr><tr><td>2026-08</td><td class="r">330</td><td class="r">63.1萬</td><td class="r">1,911</td></tr></tbody></table></div>
+<div id="c1" class="chart"></div>
+<p class="interp">整體盤五個月走出「回落—修復—登高」的節奏：5 月佛誕假期壓低至 2,382萬，6 月修復，7、8 月連續站上 2,770萬 以上，8 月以 2,789萬 創下季內新高，全季合計 <strong>1.32億 港元、25,014 張訂單</strong>。線上是另一條更陡的曲線：單量從 3 月 137 單一路爬到 8 月 330 單，翻了 1.4 倍；GMV 在 7 月摸到 64.3萬 的高點後，8 月微降至 63.1萬，客單價從 2,647 元回落到 1,911 元。回落的原因在結構而不在需求——8 月客單價偏低的飛機類訂單佔比走高，把均值拉了下來（與週報觀察一致）。</p>
+</section>
+
+<section>
+<h2><span class="num">二</span>月環比變化 <span class="badge badge-all">整體情況</span></h2>
+<div class="purpose">整體源三項指標月環比；連續兩月同向視為趨勢成立。</div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>月份</th><th class="r">GMV</th><th class="r">GMV環比</th><th class="r">單量</th><th class="r">單量環比</th><th class="r">客單價</th><th class="r">客單價環比</th></tr></thead><tbody><tr><td>2026-04</td><td class="r">2,672.3萬</td><td class="r">—</td><td class="r">4,826</td><td class="r">—</td><td class="r">5,537</td><td class="r">—</td></tr><tr><td>2026-05</td><td class="r">2,382.0萬</td><td class="r">-10.9%</td><td class="r">4,641</td><td class="r">-3.8%</td><td class="r">5,132</td><td class="r">-7.3%</td></tr><tr><td>2026-06</td><td class="r">2,547.1萬</td><td class="r">+6.9%</td><td class="r">4,955</td><td class="r">+6.8%</td><td class="r">5,141</td><td class="r">+0.2%</td></tr><tr><td>2026-07</td><td class="r">2,773.6萬</td><td class="r">+8.9%</td><td class="r">5,317</td><td class="r">+7.3%</td><td class="r">5,217</td><td class="r">+1.5%</td></tr><tr><td>2026-08</td><td class="r">2,789.4萬</td><td class="r">+0.6%</td><td class="r">5,275</td><td class="r">-0.8%</td><td class="r">5,288</td><td class="r">+1.4%</td></tr></tbody></table></div>
+<p class="interp">整體 GMV 的 V 型走勢已經走完一個完整循環：5 月 −10.9% 是季內唯一收縮，之後 6 月 +6.9%、7 月 +8.9%、8 月 +0.6% 連續三個月為正。8 月增幅明顯放緩，但單量仍維持在 5,275 單的高位，客單價回升至 5,288 元，量價都沒有轉弱跡象，更像高速增長後的平台整理。線上單量環比連續六個月為正，8 月 +35.8% 是年內第二大單月增幅，增長動能還在釋放。</p>
+</section>
+
+<section>
+<h2><span class="num">三</span>線上自助下單滲透率 <span class="badge badge-on">線上下單數據</span></h2>
+<div class="purpose">滲透率＝線上自助下單 ÷ <strong>傳統渠道</strong>（本期起統一分母），單數與金額雙口徑；以傳統渠道內「手机订单」標記交叉驗證。</div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>月份</th><th class="r">傳統渠道單量</th><th class="r">線上單量</th><th class="r">滲透率(單數)</th><th class="r">傳統渠道GMV</th><th class="r">線上GMV</th><th class="r">滲透率(金額)</th><th class="r">手机订单驗證</th></tr></thead><tbody><tr><td>2026-04</td><td class="r">3,923</td><td class="r">188</td><td class="r">4.8%</td><td class="r">1,850.8萬</td><td class="r">38.9萬</td><td class="r">2.1%</td><td class="r">5.1%</td></tr><tr><td>2026-05</td><td class="r">3,749</td><td class="r">204</td><td class="r">5.4%</td><td class="r">1,663.7萬</td><td class="r">46.3萬</td><td class="r">2.8%</td><td class="r">5.3%</td></tr><tr><td>2026-06</td><td class="r">3,937</td><td class="r">232</td><td class="r">5.9%</td><td class="r">1,803.6萬</td><td class="r">59.5萬</td><td class="r">3.3%</td><td class="r">6.0%</td></tr><tr><td>2026-07</td><td class="r">4,316</td><td class="r">243</td><td class="r">5.6%</td><td class="r">1,944.9萬</td><td class="r">64.3萬</td><td class="r">3.3%</td><td class="r">5.6%</td></tr><tr><td>2026-08</td><td class="r">4,268</td><td class="r">330</td><td class="r">7.7%</td><td class="r">1,623.0萬</td><td class="r">63.1萬</td><td class="r">3.9%</td><td class="r">8.2%</td></tr></tbody></table></div>
+<div id="c3" class="chart"></div>
+<p class="interp">換成傳統渠道分母後，滲透率的爬坡形態看得更清楚：單數口徑從 4 月 4.8% 一路抬升，7 月 5.6%，<strong>8 月跳到 7.7%</strong>，季度合計 <strong>5.9%</strong>；金額口徑同步從 2.1% 升至 3.9%，季度合計 <strong>3.1%</strong>。兩種算法（外部線上檔比對、檔內手机订单標記）每個月幾乎貼合，加上訂單號匹配率 99.2%，口徑可以放心使用。需要先講清楚一個前提：<strong>「傳統渠道」與「線上下單」並非對立概念——線上下單客戶全部來源於傳統渠道，屬於存量客戶的轉化，而非淨增量</strong>。8 月的讀法也應照此理解：當月傳統渠道單量基本持平，線上佔比上升，反映的是同一批存量客戶把下單動作從線下搬到了線上，轉化在加速，而不是憑空多了一批新客。金額滲透仍約為單數滲透的一半，大額單還在線下，提升空間主要在这里。</p>
+</section>
+
+<section>
+<h2><span class="num">四</span>客戶分層與貢獻度 <span class="badge badge-all">整體情況</span></h2>
+<div class="purpose">季度 RFM 四層分層、上下半季遷移、CR5/CR10、月度留存。本章以結構圖為主呈現。</div>
+<h3>客戶分層結構（紡錘形）</h3>
+<svg viewBox="0 0 680 366" style="width:100%;height:auto;display:block;" role="img" aria-label="客戶分層紡錘形結構圖"><rect x="265" y="26" width="70" height="62.0" rx="10" fill="#dc2626" opacity="0.92"/><text x="349" y="53.0" fill="#dc2626" font-size="14.5" font-weight="700">核心大客　3 家</text><text x="349" y="73.0" fill="#3d4c63" font-size="13">金額佔比 24.9%</text><rect x="252" y="100" width="96" height="62.0" rx="10" fill="#d97706" opacity="0.92"/><text x="362" y="127.0" fill="#d97706" font-size="14.5" font-weight="700">高價值活躍　57 家</text><text x="362" y="147.0" fill="#3d4c63" font-size="13">金額佔比 34.3%</text><rect x="50" y="174" width="500" height="62.0" rx="10" fill="#0e7490" opacity="0.92"/><text x="300.0" y="201.0" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">常規客戶　297 家</text><text x="300.0" y="221.0" text-anchor="middle" fill="#fff" font-size="13" opacity="0.95">金額佔比 40.1%</text><rect x="265" y="248" width="71" height="62.0" rx="10" fill="#94a3b8" opacity="0.92"/><text x="349" y="275.0" fill="#94a3b8" font-size="14.5" font-weight="700">小額沉睡　42 家</text><text x="349" y="295.0" fill="#3d4c63" font-size="13">金額佔比 0.6%</text><text x="20" y="340.0" fill="#5b6b7f" font-size="12.5">註：CR5／CR10＝前五大／前十大客戶金額佔比合計（Concentration Ratio，客戶集中度比率，比例越高，收入對頭部客戶依賴越高）。</text></svg>
+<p class="note">CR5＝30.9%、CR10＝41.0%；核心大客 3 家：鴻泰企業、大家樂、大快活。結構健康，無單一客戶依賴。</p>
+<h3>留存率對比</h3>
+<div id="c4b" class="chart chart-sm"></div>
+<h3>客戶遷移流向（增量與流失的對沖）</h3>
+<svg viewBox="0 0 680 340" style="width:100%;height:auto;display:block;" role="img" aria-label="客戶遷移流向圖">
+  <defs><marker id="arw" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#5b6b7f"/></marker></defs>
+  <rect x="20" y="120" width="150" height="100" rx="12" fill="#123047"/>
+  <text x="95" y="160" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">上半季活躍客戶</text>
+  <text x="95" y="182" text-anchor="middle" fill="#bae6fd" font-size="12">（4–6 月有下單）</text>
+  <rect x="20" y="250" width="150" height="60" rx="12" fill="#0e7490"/>
+  <text x="95" y="276" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">下半季新客</text>
+  <text x="95" y="296" text-anchor="middle" fill="#e0f2fe" font-size="12">＋25 家（7–8 月首次下單）</text>
+  <rect x="500" y="120" width="160" height="100" rx="12" fill="#0e7490"/>
+  <text x="580" y="160" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">下半季活躍客戶</text>
+  <text x="580" y="182" text-anchor="middle" fill="#e0f2fe" font-size="12">（7–8 月有下單）</text>
+  <line x1="170" y1="150" x2="500" y2="62" stroke="#16a34a" stroke-width="3" marker-end="url(#arw)"/>
+  <rect x="255" y="26" width="170" height="46" rx="10" fill="#f0fdf4" stroke="#16a34a"/>
+  <text x="340" y="46" text-anchor="middle" fill="#15803d" font-size="13.5" font-weight="700">升級 18 家</text>
+  <text x="340" y="64" text-anchor="middle" fill="#15803d" font-size="12.5">下半季價值上升</text>
+  <line x1="170" y1="170" x2="500" y2="140" stroke="#d97706" stroke-width="3" marker-end="url(#arw)"/>
+  <rect x="255" y="118" width="170" height="46" rx="10" fill="#fffbeb" stroke="#d97706"/>
+  <text x="340" y="138" text-anchor="middle" fill="#92400e" font-size="13.5" font-weight="700">下滑 24 家</text>
+  <text x="340" y="156" text-anchor="middle" fill="#92400e" font-size="12.5">價值回落</text>
+  <line x1="170" y1="195" x2="500" y2="240" stroke="#dc2626" stroke-width="3" marker-end="url(#arw)"/>
+  <rect x="255" y="214" width="170" height="46" rx="10" fill="#fef2f2" stroke="#dc2626"/>
+  <text x="340" y="234" text-anchor="middle" fill="#b91c1c" font-size="13.5" font-weight="700">轉無單 33 家</text>
+  <text x="340" y="252" text-anchor="middle" fill="#b91c1c" font-size="12.5">7–8 月無下單</text>
+  <line x1="170" y1="280" x2="500" y2="200" stroke="#0e7490" stroke-width="3" stroke-dasharray="6 4" marker-end="url(#arw)"/>
+  <rect x="60" y="308" width="560" height="26" rx="13" fill="#f0f9ff" stroke="#bae6fd"/>
+  <text x="340" y="326" text-anchor="middle" fill="#075985" font-size="12.5" font-weight="700">增量（升級 18＋新客 25＝43 家）對沖 流失（下滑 24＋無單 33＝57 家）→ 總盤增長，但腰部客戶維護需加強</text>
+</svg>
+<p class="interp">結構仍是健康的紡錘形：常規客戶 297 家貢獻 40.1%，高價值活躍 57 家貢獻 34.3%，核心大客 3 家貢獻 24.9%，集中度指標溫和。留存是這份報告裡最讓人放心的數字：四個月留存率全部站在 90% 以上，7→8月 93.7%，4 月新客到 8 月仍有 90.4% 活躍。隱憂在遷移：下半季 24 家價值下滑、33 家由活躍轉為無單，對沖了 18 家升級和 25 家新客的增量。客戶總盤在長，但腰部客戶的維護強度需要跟上。</p>
+</section>
+
+<section>
+<h2><span class="num">五</span>品類／商品結構變化 <span class="badge badge-all">整體情況</span></h2>
+<h3>季度品類銷售排行（Top 10，按金額）</h3>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>小類</th><th class="r">季度金額(港元)</th><th class="r">金額佔比</th></tr></thead><tbody><tr><td>帶皮腿扒</td><td class="r">972.1萬</td><td class="r">7.4%</td></tr><tr><td>一號肉</td><td class="r">970.0萬</td><td class="r">7.4%</td></tr><tr><td>羊排</td><td class="r">956.8萬</td><td class="r">7.3%</td></tr><tr><td>大排</td><td class="r">745.7萬</td><td class="r">5.7%</td></tr><tr><td>面精肉</td><td class="r">736.3萬</td><td class="r">5.6%</td></tr><tr><td>肥牛</td><td class="r">700.4萬</td><td class="r">5.3%</td></tr><tr><td>牛霖</td><td class="r">663.9萬</td><td class="r">5.0%</td></tr><tr><td>去皮上腿肉</td><td class="r">628.5萬</td><td class="r">4.8%</td></tr><tr><td>挑骨豬腩</td><td class="r">628.5萬</td><td class="r">4.8%</td></tr><tr><td>帶骨全腿</td><td class="r">564.8萬</td><td class="r">4.3%</td></tr></tbody></table></div>
+<div id="c5" class="chart chart-sm"></div>
+<h3>頭部品類月度份額變化（Top 6）</h3>
+<div id="c5b" class="chart chart-sm"></div>
+<h3>品類集中度</h3>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>月份</th><th class="r">HHI</th><th class="r">CR5 品類佔比</th></tr></thead><tbody><tr><td>2026-04</td><td class="r">439</td><td class="r">34.9%</td></tr><tr><td>2026-05</td><td class="r">487</td><td class="r">38.8%</td></tr><tr><td>2026-06</td><td class="r">482</td><td class="r">38.0%</td></tr><tr><td>2026-07</td><td class="r">493</td><td class="r">39.1%</td></tr><tr><td>2026-08</td><td class="r">577</td><td class="r">41.5%</td></tr></tbody></table></div>
+<p class="note">指標註釋：HHI＝赫芬達爾-赫希曼指數（Herfindahl-Hirschman Index），各品類金額份額的平方和，用於衡量品類集中度，數值越高代表銷售越集中於少數品類；CR5＝前五大品類金額佔比合計（Concentration Ratio，行業集中度比率）。</p>
+<h3>季度重點搭售組合（Support≥1%，按 Lift 排序）</h3>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>搭售組合</th><th class="r">組合佔比</th><th class="r">搭購轉化率</th><th class="r">提升倍數</th></tr></thead><tbody><tr><td>去皮上腿肉 → 帶皮上腿肉</td><td class="r">1.01%</td><td class="r">11.6%</td><td class="r">2.52 倍</td></tr><tr><td>帶皮上腿肉 → 去皮上腿肉</td><td class="r">1.01%</td><td class="r">21.9%</td><td class="r">2.52 倍</td></tr><tr><td>小胸肉 → 帶皮腿扒</td><td class="r">1.3%</td><td class="r">32.0%</td><td class="r">1.75 倍</td></tr><tr><td>帶皮腿扒 → 小胸肉</td><td class="r">1.3%</td><td class="r">7.1%</td><td class="r">1.75 倍</td></tr><tr><td>帶皮腿扒 → 面精肉</td><td class="r">1.45%</td><td class="r">7.9%</td><td class="r">1.05 倍</td></tr><tr><td>面精肉 → 帶皮腿扒</td><td class="r">1.45%</td><td class="r">19.3%</td><td class="r">1.05 倍</td></tr></tbody></table></div>
+<div class="callout"><strong>搭售組合的延伸價值：</strong>若未來在一張訂單中，同時出現凍品和其他部門的產品，可有助於發掘目標客戶的業務性質，同時為特定商品組合設定組合促銷方案，並且為採購備貨提供指引方向。</div>
+<p class="interp">品類盤繼續向主力集中：CR5 從 4 月 34.9% 升至 8 月 41.5%，HHI 從 439 抬到 577，8 月的集中化明顯加速。好處是備貨效率高、主力品議價能力強；代價是雞肉類的價格波動會更直接地傳導到整體 GMV，建議對頭部品類保持更高的安全庫存，同時留意二線品類是否有被擠壓的跡象。搭售方面，季度級規則以雞肉類內部連帶為主，「去皮上腿肉→帶皮上腿肉」提升倍數 2.52 倍，這些組合可以原樣搬進套餐設計和滿額檔位。</p>
+</section>
+
+<section>
+<h2><span class="num">六</span>異常未下單用戶分析</h2>
+<div class="purpose">識別「偏離自身下單節奏」的客戶：未下單時長 ≥ 常態下單週期的 2 倍且 ≥14 天（單次客 ≥30 天）。常態週期＝該客戶相鄰訂單間隔天數的中位數。</div>
+<h3><span class="badge badge-all">整體情況</span> 整體訂單（全部渠道，58 家異常，按金額排序列前 15）</h3>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>客戶</th><th class="r">季內單量</th><th class="r">季內金額</th><th class="r">常態下單週期</th><th class="r">最後下單</th><th class="r">未下單時長</th><th class="r">偏離倍數</th></tr></thead><tbody><tr><td>集興凍肉海產有限公司</td><td class="r">41</td><td class="r">61.3萬</td><td class="r">2.0 天</td><td class="r">2026-08-17</td><td class="r">14 天</td><td class="r">7.0×</td></tr><tr><td>澤興食品有限公司</td><td class="r">30</td><td class="r">18.1萬</td><td class="r">4.0 天</td><td class="r">2026-08-10</td><td class="r">21 天</td><td class="r">5.2×</td></tr><tr><td>永利興食品有限公司</td><td class="r">28</td><td class="r">17.3萬</td><td class="r">1.0 天</td><td class="r">2026-07-08</td><td class="r">54 天</td><td class="r">54.0×</td></tr><tr><td>天榮物流貿易有限公司</td><td class="r">42</td><td class="r">15.3萬</td><td class="r">3.0 天</td><td class="r">2026-08-17</td><td class="r">14 天</td><td class="r">4.7×</td></tr><tr><td>寶升凍肉公司</td><td class="r">16</td><td class="r">14.7萬</td><td class="r">6.0 天</td><td class="r">2026-08-11</td><td class="r">20 天</td><td class="r">3.3×</td></tr><tr><td>玖記(集團)有限公司</td><td class="r">27</td><td class="r">12.2萬</td><td class="r">4.0 天</td><td class="r">2026-08-05</td><td class="r">26 天</td><td class="r">6.5×</td></tr><tr><td>德興燒味餐廳</td><td class="r">58</td><td class="r">11.9萬</td><td class="r">1.0 天</td><td class="r">2026-06-18</td><td class="r">74 天</td><td class="r">74.0×</td></tr><tr><td>新領匯食品有限公司</td><td class="r">6</td><td class="r">11.1萬</td><td class="r">4.0 天</td><td class="r">2026-05-18</td><td class="r">105 天</td><td class="r">26.2×</td></tr><tr><td>廣聯興(集團)食品超級市場</td><td class="r">121</td><td class="r">10.3萬</td><td class="r">1.0 天</td><td class="r">2026-07-30</td><td class="r">32 天</td><td class="r">32.0×</td></tr><tr><td>榮裕飲食集團有限公司</td><td class="r">22</td><td class="r">9.5萬</td><td class="r">2.0 天</td><td class="r">2026-06-25</td><td class="r">67 天</td><td class="r">33.5×</td></tr><tr><td>金寶食品有限公司(葵涌)</td><td class="r">12</td><td class="r">8.0萬</td><td class="r">2.0 天</td><td class="r">2026-05-11</td><td class="r">112 天</td><td class="r">56.0×</td></tr><tr><td>炳記貿易有限公司</td><td class="r">2</td><td class="r">3.9萬</td><td class="r">4.0 天</td><td class="r">2026-07-29</td><td class="r">33 天</td><td class="r">8.2×</td></tr><tr><td>利寶凍肉有限公司</td><td class="r">20</td><td class="r">2.9萬</td><td class="r">3.0 天</td><td class="r">2026-07-30</td><td class="r">32 天</td><td class="r">10.7×</td></tr><tr><td>合興香港有限公司</td><td class="r">10</td><td class="r">2.9萬</td><td class="r">1.0 天</td><td class="r">2026-08-14</td><td class="r">17 天</td><td class="r">17.0×</td></tr><tr><td>龍園食品廠</td><td class="r">51</td><td class="r">2.4萬</td><td class="r">1.0 天</td><td class="r">2026-06-26</td><td class="r">66 天</td><td class="r">66.0×</td></tr></tbody></table></div>
+<h3><span class="badge badge-on">線上下單數據</span> 線上下單（32 家異常，按金額排序列前 15）</h3>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>客戶</th><th class="r">季內單量</th><th class="r">季內金額</th><th class="r">常態下單週期</th><th class="r">最後下單</th><th class="r">未下單時長</th><th class="r">偏離倍數</th></tr></thead><tbody><tr><td>明興</td><td class="r">20</td><td class="r">6.7萬</td><td class="r">2.1 天</td><td class="r">2026-08-13</td><td class="r">18 天</td><td class="r">8.5×</td></tr><tr><td>昭楠</td><td class="r">16</td><td class="r">5.8萬</td><td class="r">3.0 天</td><td class="r">2026-06-01</td><td class="r">91 天</td><td class="r">30.0×</td></tr><tr><td>聯合林記</td><td class="r">36</td><td class="r">5.8萬</td><td class="r">1.0 天</td><td class="r">2026-08-12</td><td class="r">19 天</td><td class="r">19.0×</td></tr><tr><td>新田</td><td class="r">6</td><td class="r">4.5萬</td><td class="r">1.0 天</td><td class="r">2026-05-05</td><td class="r">118 天</td><td class="r">119.6×</td></tr><tr><td>新協興</td><td class="r">15</td><td class="r">2.6萬</td><td class="r">5.5 天</td><td class="r">2026-08-13</td><td class="r">18 天</td><td class="r">3.3×</td></tr><tr><td>新江</td><td class="r">12</td><td class="r">1.6萬</td><td class="r">1.4 天</td><td class="r">2026-05-09</td><td class="r">114 天</td><td class="r">83.4×</td></tr><tr><td>福永行</td><td class="r">5</td><td class="r">1.5萬</td><td class="r">13.5 天</td><td class="r">2026-07-03</td><td class="r">59 天</td><td class="r">4.4×</td></tr><tr><td>福偉</td><td class="r">14</td><td class="r">1.3萬</td><td class="r">6.3 天</td><td class="r">2026-06-15</td><td class="r">77 天</td><td class="r">12.2×</td></tr><tr><td>瑞興</td><td class="r">7</td><td class="r">1.1萬</td><td class="r">0.4 天</td><td class="r">2026-03-28</td><td class="r">156 天</td><td class="r">348.9×</td></tr><tr><td>東浩</td><td class="r">2</td><td class="r">1.1萬</td><td class="r">4.0 天</td><td class="r">2026-05-12</td><td class="r">111 天</td><td class="r">27.7×</td></tr><tr><td>利寶</td><td class="r">1</td><td class="r">1.0萬</td><td class="r">單次客</td><td class="r">2026-07-03</td><td class="r">59 天</td><td class="r">—</td></tr><tr><td>裕豐</td><td class="r">3</td><td class="r">0.8萬</td><td class="r">單次客</td><td class="r">2026-05-08</td><td class="r">115 天</td><td class="r">5964.6×</td></tr><tr><td>三興行</td><td class="r">1</td><td class="r">0.8萬</td><td class="r">單次客</td><td class="r">2026-06-01</td><td class="r">91 天</td><td class="r">—</td></tr><tr><td>再興</td><td class="r">2</td><td class="r">0.8萬</td><td class="r">4.0 天</td><td class="r">2026-05-12</td><td class="r">111 天</td><td class="r">27.8×</td></tr><tr><td>英豐</td><td class="r">3</td><td class="r">0.8萬</td><td class="r">2.0 天</td><td class="r">2026-05-12</td><td class="r">111 天</td><td class="r">54.7×</td></tr></tbody></table></div>
+<p class="interp">整體維度有 58 家客戶偏離了自己的下單節奏，排在前面的是集興凍肉海產——常態每 2 天下一單、季內貢獻 61.3萬，如今已 14 天沒有動靜，偏離 7 倍；澤興食品（常態 4 天、21 天未下單）和永利興（常態每日下單、54 天未下單）同樣需要立刻跟進。線上維度的 32 家更值得一對一問原因：昭楠常態 3 天一單，已 91 天沒有下單；新田 118 天、聯合林記常態每日下單卻 19 天無單。這些客戶過去的使用習慣已經養成，沉默往往不是忘了 APP，而是採購需求或對接人發生了變化——按金額從大到小逐戶電訪，比群發推送有效得多。</p>
+</section>
+
+<section>
+<h2><span class="num">七</span>季節性規律判斷 <span class="badge badge-all">整體情況</span></h2>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>月份</th><th class="r">季節指數（當月GMV÷季內月均）</th></tr></thead><tbody><tr><td>2026-04</td><td class="r">1.01</td></tr><tr><td>2026-05</td><td class="r">0.90</td></tr><tr><td>2026-06</td><td class="r">0.97</td></tr><tr><td>2026-07</td><td class="r">1.05</td></tr><tr><td>2026-08</td><td class="r">1.06</td></tr></tbody></table></div>
+<div id="c7" class="chart chart-sm"></div>
+<p class="interp">五個月的季節指數畫出一條淺 U 形：5 月 0.90 是谷底（佛誕假期），之後逐月爬升，7 月 1.05、8 月 1.06。暑期餐飲需求疊加開學、中秋前置備貨，讓 7–8 月成為季內最穩定的兩個月。週內節奏沒有變化：訂單集中在工作日，週二至週四是高峰，週末明顯回落，推送和促銷開啟排在週一上午或週三效果最好。樣本只有五個月，這些規律先作為備貨與檔期安排的參考，待跨年數據累積後再固化。</p>
+</section>
+
+<section>
+<h2><span class="num">八</span>交叉比對：APP 自助下單客戶 vs 其他渠道客戶</h2>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>客群</th><th class="r">客戶數</th><th class="r">季內單量</th><th class="r">人均單量</th><th class="r">季內GMV(港元)</th><th class="r">客單價</th></tr></thead><tbody><tr><td>APP自助下單客戶</td><td class="r">62</td><td class="r">1,244</td><td class="r">20.1</td><td class="r">290.9萬</td><td class="r">2,338</td></tr><tr><td>其他渠道客戶</td><td class="r">399</td><td class="r">23,770</td><td class="r">59.6</td><td class="r">12,873.5萬</td><td class="r">5,416</td></tr></tbody></table></div>
+<p class="interp">兩個客群的行為差異非常穩定：APP 自助下單客戶 62 家，人均季內下單 20.1 次、客單價約 2,338 元，典型的高頻補貨型買家；其他渠道 399 家，人均 59.6 次、客單價約 5,416 元，是線上的 2.3 倍。品類偏好上，線上客戶集中在 羊排（22.1%）、面精肉（20.1%）、一號肉（17.5%）、帶皮腿扒（9.2%）、去皮上腿肉（5.5%），其他渠道則是 帶皮腿扒（7.3%）、一號肉（7.1%）、羊排（6.9%）、大排（5.8%）、肥牛（5.4%）。需要說明的是，這 62 家線上客戶並非新開發的客源，而是<strong>從傳統渠道存量客戶轉化而來</strong>——經營上的分工由此自然形成：線上接高頻小額補貨單，線下接大額議價單。下一步的滲透策略不必硬搬大單，繼續推動存量客戶把補貨單轉到線上，衝擊最小、見效最快。</p>
+</section>
+
+<section>
+<h2><span class="num">九</span>核心發現與業務建議</h2>
+<div class="finding"><b>發現 1｜整體與線上雙雙創高。</b>整體 8 月 GMV 2,789萬 創季內新高，全季 1.32億；線上單量六連升至 330 單。需留意：線上增長來自傳統渠道存量客戶的轉化，而非新增客源。</div>
+<div class="finding"><b>發現 2｜滲透率開始加速（存量轉化視角）。</b>以傳統渠道為分母，單數滲透率 4.8%→7.7%（季度合計 5.9%），8 月單月 +2.1pp，反映存量客戶由線下轉為線上下單的轉化在加速；金額滲透 3.1%，大額單仍在線下。</div>
+<div class="finding"><b>發現 3｜留存強、腰部鬆。</b>月留存全部 ≥90%，CR5 僅 30.9%；但下半季 33 家轉無單、24 家下滑，整體 58 家、線上 32 家客戶偏離自身下單節奏。</div>
+<div class="finding"><b>發現 4｜品類集中化加速。</b>CR5 品類 34.9%→41.5%、HHI 439→577，雞肉類主導加深；季度搭售組合穩定（最高 Lift 2.52 倍），可直接套餐化。</div>
+<div class="finding"><b>發現 5｜線上客單價 8 月回落屬結構性。</b>2,647 元→1,911 元源於飛機類佔比上升，非需求轉弱；年度目標完成率 25.11%（301.3萬/1,200萬），進度符合預期。</div>
+<h3>可執行建議</h3>
+<p class="interp">下季度的動作圍繞四件事展開。滲透率方面，趁 8 月的加速勢頭把單數滲透率目標定在 10%，用線上專屬品和下單回贈承接新客，同時把線下大客戶的補貨單引到線上，先把金額滲透從 3.1% 做起。客戶維護方面，對 58 家節奏異常客戶按金額從大到小逐戶電訪，先問清集興凍肉、澤興、永利興這三家頭部沉默戶的原因，並把 30/60/90 天分層觸達固化為常態機制。品類方面，把高 Lift 搭售組合做成固定套餐和滿額檔位，凍品與其他部門產品的跨類組合單另作標記，用來識別客戶業務性質、指導組合促銷和採購備貨；頭部品類集中度上升快，安全庫存相應上調。數據方面，每月末固定導出整體明細快照，避免 8 月那種日期格式混雜再次影響統計。</p>
+</section>
+
+<footer>B端商城季度分析報告（2026年4–8月）｜數據來源：凍肉(4-8月).xlsm、区分客户自助下单_20260521_006 (13).xlsx｜滲透率分母：傳統渠道｜分析框架 v1.1</footer>
+</div>
+
+<script>
+var D = {"months_all": ["2026-04", "2026-05", "2026-06", "2026-07", "2026-08"], "months_on": ["2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08"], "all_gmv": [26.72, 23.82, 25.47, 27.74, 27.89], "all_orders": [4826, 4641, 4955, 5317, 5275], "on_gmv": [29.3, 38.9, 46.3, 59.5, 64.3, 63.1], "on_orders": [137, 188, 204, 232, 243, 330], "pen_months": ["2026-04", "2026-05", "2026-06", "2026-07", "2026-08"], "pen_orders": [4.8, 5.4, 5.9, 5.6, 7.7], "pen_gmv": [2.1, 2.8, 3.3, 3.3, 3.9], "pen_flag": [5.1, 5.3, 6.0, 5.6, 8.2], "tier_names": ["核心大客", "高價值活躍", "常規客戶", "小額沉睡"], "tier_gmv": [32.83, 45.2, 52.78, 0.83], "tier_n": [3, 57, 297, 42], "cat_names": ["帶皮腿扒", "一號肉", "羊排", "大排", "面精肉", "肥牛", "牛霖", "去皮上腿肉", "挑骨豬腩", "帶骨全腿"], "cat_amt": [9.72, 9.7, 9.57, 7.46, 7.36, 7.0, 6.64, 6.29, 6.29, 5.65], "share_months": ["2026-04", "2026-05", "2026-06", "2026-07", "2026-08"], "share_series": {"帶皮腿扒": [7.4, 7.6, 7.9, 7.8, 6.3], "一號肉": [8.3, 6.8, 7.9, 7.6, 6.2], "羊排": [7.5, 7.0, 6.4, 8.0, 7.4], "大排": [6.0, 3.2, 8.4, 4.8, 5.8], "面精肉": [5.5, 5.5, 5.5, 6.0, 5.4], "肥牛": [2.9, 0.1, 4.8, 2.0, 15.9]}, "wd_months": ["2026-04", "2026-05", "2026-06", "2026-07", "2026-08"], "wd_matrix": [[745, 624, 1181, 1324, 797, 155, 0], [766, 818, 744, 826, 1121, 366, 0], [1333, 993, 753, 871, 736, 269, 0], [983, 756, 756, 1096, 1437, 287, 2], [1342, 809, 771, 839, 1100, 411, 3]], "season_idx": [1.01, 0.9, 0.97, 1.05, 1.06], "season_months": ["2026-04", "2026-05", "2026-06", "2026-07", "2026-08"]};
+var C_ALL = '#0e7490', C_ON = '#d97706', C_GREY = '#94a3b8', C_RED = '#dc2626';
+function mk(id, opt) { var el = document.getElementById(id); if (!el) return; var c = echarts.init(el); c.setOption(opt); window.addEventListener('resize', function() { c.resize(); }); }
+var baseGrid = { left: 64, right: 64, top: 56, bottom: 40 };
+
+mk('c1', {
+  color: [C_ALL, C_ON, C_ALL, C_ON],
+  tooltip: { trigger: 'axis' },
+  legend: { data: ['整體GMV(百萬港元)', '線上GMV(萬港元)', '整體單量', '線上單量'], bottom: 0 },
+  grid: baseGrid,
+  xAxis: { type: 'category', data: D.months_on },
+  yAxis: [
+    { type: 'value', name: '整體GMV（百萬）' },
+    { type: 'value', name: '線上GMV（萬）' }
+  ],
+  series: [
+    { name: '整體GMV(百萬港元)', type: 'bar', data: D.months_all.map(function(m) { return [m, D.all_gmv[D.months_all.indexOf(m)]]; }), barWidth: '26%', itemStyle: { borderRadius: [4,4,0,0] } },
+    { name: '線上GMV(萬港元)', type: 'bar', yAxisIndex: 1, data: D.months_on.map(function(m, i) { return [m, D.on_gmv[i]]; }), barWidth: '26%', itemStyle: { borderRadius: [4,4,0,0] } },
+    { name: '整體單量', type: 'line', data: D.months_all.map(function(m) { return [m, D.all_orders[D.months_all.indexOf(m)]]; }), smooth: true, lineStyle: { width: 2.5 } },
+    { name: '線上單量', type: 'line', data: D.months_on.map(function(m, i) { return [m, D.on_orders[i]]; }), smooth: true, lineStyle: { width: 2.5, type: 'dashed' } }
+  ]
+});
+
+mk('c3', {
+  color: [C_ALL, C_ON, C_GREY],
+  tooltip: { trigger: 'axis' },
+  legend: { data: ['滲透率(單數)', '滲透率(金額)', '手机订单驗證'], bottom: 0 },
+  grid: baseGrid,
+  xAxis: { type: 'category', data: D.pen_months },
+  yAxis: { type: 'value', name: '%', max: 10 },
+  series: [
+    { name: '滲透率(單數)', type: 'line', data: D.pen_orders, smooth: true, lineStyle: { width: 3 },
+       areaStyle: { opacity: 0.12 }, label: { show: true, formatter: '{c}%', fontWeight: 700 } },
+    { name: '滲透率(金額)', type: 'line', data: D.pen_gmv, smooth: true, lineStyle: { width: 3 },
+       label: { show: true, formatter: '{c}%' } },
+    { name: '手机订单驗證', type: 'line', data: D.pen_flag, lineStyle: { type: 'dashed', width: 1.5 } }
+  ]
+});
+
+mk('c4b', {
+  color: [C_ALL],
+  tooltip: { trigger: 'axis', valueFormatter: function(v) { return v + '%'; } },
+  grid: { left: 130, right: 60, top: 24, bottom: 30 },
+  xAxis: { type: 'value', max: 100, name: '留存率 %' },
+  yAxis: { type: 'category', data: ['4月→5月', '5月→6月', '6月→7月', '7月→8月', '4月新客→8月仍活躍'] },
+  series: [{
+    type: 'bar', barWidth: '52%',
+    data: [
+      { value: 90.1 }, { value: 93.9 }, { value: 91.0 },
+      { value: 93.7, itemStyle: { color: C_ON } },
+      { value: 90.4, itemStyle: { color: C_ON } }
+    ],
+    itemStyle: { borderRadius: [0, 5, 5, 0] },
+    label: { show: true, position: 'right', formatter: '{c}%', fontWeight: 700 },
+    markLine: { symbol: 'none', data: [{ xAxis: 90 }],
+      lineStyle: { color: C_RED, type: 'dashed', width: 1.5 },
+      label: { formatter: '90% 警戒線', position: 'end', color: C_RED, fontSize: 11 } }
+  }]
+});
+
+mk('c5', {
+  color: [C_ALL],
+  tooltip: { trigger: 'axis' },
+  grid: { left: 110, right: 46, top: 16, bottom: 30 },
+  xAxis: { type: 'value', name: '百萬港元' },
+  yAxis: { type: 'category', data: D.cat_names.slice().reverse() },
+  series: [{ type: 'bar', data: D.cat_amt.slice().reverse(), barWidth: '58%',
+    itemStyle: { borderRadius: [0, 4, 4, 0] }, label: { show: true, position: 'right' } }]
+});
+
+var shareSeries = Object.keys(D.share_series).map(function(cat) {
+  return { name: cat, type: 'bar', stack: 's', emphasis: { focus: 'series' }, data: D.share_series[cat] };
+});
+mk('c5b', {
+  tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, valueFormatter: function(v) { return v + '%'; } },
+  legend: { bottom: 0, type: 'scroll' },
+  grid: { left: 50, right: 30, top: 30, bottom: 60 },
+  xAxis: { type: 'category', data: D.share_months },
+  yAxis: { type: 'value', name: '份額 %' },
+  series: shareSeries
+});
+
+var wdData = [];
+D.wd_matrix.forEach(function(row, mi) { row.forEach(function(v, wi) { wdData.push([wi, mi, v]); }); });
+mk('c7', {
+  tooltip: { position: 'top' },
+  grid: { left: 90, right: 30, top: 24, bottom: 70 },
+  xAxis: { type: 'category', data: ['週一', '週二', '週三', '週四', '週五', '週六', '週日'] },
+  yAxis: { type: 'category', data: D.wd_months },
+  visualMap: { min: 0, max: Math.max.apply(null, wdData.map(function(d) { return d[2]; })),
+    calculable: true, orient: 'horizontal', left: 'center', bottom: 0,
+    inRange: { color: ['#f0f9ff', C_ALL] } },
+  series: [{ type: 'heatmap', data: wdData, label: { show: true, fontSize: 10 } }]
+});
+</script>
+</body>
+</html>
