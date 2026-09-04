@@ -20,6 +20,18 @@
     </div>
   </div>
   <div class="filter-bar" id="cat-bar"></div>
+
+  <!-- 資訊工具列：手動刷新＋狀態顯示 -->
+  <div class="news-toolbar">
+    <button class="btn btn-sm" id="btn-refresh">重新整理資訊</button>
+    <span id="refresh-status" class="refresh-status"></span>
+    <span id="unread-count" class="unread-count"></span>
+  </div>
+  <div id="news-error" class="notice err news-error" style="display:none;">
+    <span id="news-error-msg"></span>
+    <button class="btn btn-sm btn-grey" id="btn-retry">重試</button>
+  </div>
+
   <p id="result-count" style="font-size:.85rem;color:#666;margin-bottom:12px;"></p>
   <div id="news-list"></div>
 

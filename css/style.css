@@ -296,6 +296,36 @@ table.data tr:hover td { background: var(--line-soft); }
 .src-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
 .src-fields { font-size: .82rem; color: var(--ink-soft); }
 
+/* ---------- 資訊工具列（刷新 / 已讀狀態） ---------- */
+.news-toolbar {
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  margin-bottom: 14px;
+}
+.refresh-status { font-size: .8rem; color: var(--ink-soft); }
+.unread-count {
+  font-size: .8rem; font-weight: 700; color: var(--ice-deep);
+  background: var(--line-soft); border-radius: 20px; padding: 3px 12px;
+}
+.btn.loading { background: var(--ice-deep); cursor: wait; opacity: .85; }
+.btn.loading::after {
+  content: ""; display: inline-block; width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,.4); border-top-color: #fff;
+  border-radius: 50%; margin-left: 8px; vertical-align: -2px;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.btn:disabled { opacity: .85; cursor: wait; }
+
+.news-error {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.news-error .btn { flex-shrink: 0; }
+
+/* 已讀標記：已讀條目淡化顯示 */
+.badge-read { background: #93a5b3; }
+.news-item.read { opacity: .78; }
+.news-item.read h3 { color: var(--ink-soft); }
+
 /* ---------- 頁尾（深海藍） ---------- */
 .footer {
   background: linear-gradient(180deg, var(--ice-dark) 0%, #042740 100%);
@@ -346,4 +376,10 @@ table.data tr:hover td { background: var(--line-soft); }
   .logo { font-size: 1.15rem; }
   .topbar::before { right: 10px; }
   .topbar::after { display: none; }
+  /* 資訊工具列：按鈕全寬、狀態文字換行，方便手機單手操作 */
+  .news-toolbar { flex-direction: column; align-items: stretch; gap: 8px; }
+  .news-toolbar .btn { width: 100%; text-align: center; }
+  .refresh-status, .unread-count { text-align: center; }
+  .news-error { flex-direction: column; align-items: stretch; text-align: center; }
+  .news-error .btn { width: 100%; }
 }

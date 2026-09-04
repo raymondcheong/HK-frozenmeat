@@ -25,7 +25,9 @@ var Store = {
       return (c.editedNews && c.editedNews[n.id]) ? Object.assign({}, n, c.editedNews[n.id]) : n;
     });
     return edited.concat(c.newNews || []).sort(function (a, b) {
-      return a.date < b.date ? 1 : -1;
+      /* 發布日期倒序；同日期按 id 遞減（n0xx 越大越新），確保最新條目優先 */
+      if (a.date !== b.date) return a.date < b.date ? 1 : -1;
+      return String(a.id) < String(b.id) ? 1 : -1;
     });
   },
 
