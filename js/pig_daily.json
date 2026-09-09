@@ -130,5 +130,19 @@
       "local": 100,
       "total": 3160
     }
+  },
+  {
+    "date": "2026-09-08",
+    "mainland": 3549,
+    "local": 146,
+    "total": 3695,
+    "high": 1650,
+    "low": 800,
+    "avg": 1008,
+    "forecast": {
+      "mainland": 2964,
+      "local": 100,
+      "total": 3064
+    }
   }
 ]
