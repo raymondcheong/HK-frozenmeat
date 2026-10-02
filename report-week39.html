@@ -3627,6 +3627,7 @@ body.pdf-export .section-customer-bar .chart-wrapper img { max-height: 95mm !imp
 
       function applyDraftData(data) {
         if (!data || !data.editables || !data.editables.length) return false;
+        if (typeof data.v === 'number' && data.v !== DRAFT_VERSION) return false;
         var exp = EXPECTED_REPORT_TITLE.replace(/\s+/g, '');
         var first = (data.editables[0] || '').replace(/<[^>]+>/g, '').replace(/\s+/g, '');
         if (first !== exp) return false;
