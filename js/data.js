@@ -432,7 +432,11 @@
     { id: "n095", category: "供應變化", region: "國際", source: "SeafoodSource（英文，引述蘇格蘭政府統計）", date: "2026-10-02",
       title: "蘇格蘭三文魚2025年產量增3%至19.78萬噸 成活率升至68.8% 魚苗增20%",
       summary: "SeafoodSource 10月2日報導：蘇格蘭政府統計顯示2025年大西洋三文魚產量增3%至197,836噸，養成存活率由61.8%升至68.8%，魚苗產量增20%；兩大產區供應同步改善。",
-      content: "國際水產媒體 SeafoodSource 10月2日報導，蘇格蘭政府最新發布的《2025年魚類養殖生產調查》（Scottish Fish Farm Production Survey 2025）顯示，2025年蘇格蘭大西洋三文魚產量增加3%（+5,836噸）至197,836噸；2023年級三文魚養成存活率由2022年級的61.8%升至68.8%，月均存活率達98.3%；魚苗（smolt）產量更大增20%（+890萬尾）至5,350萬尾。行業組織 Salmon Scotland 行政總裁 Tavish Scott 表示，新數據是對蘇格蘭三文魚的「又一次信心投票」，增產反映養殖商對本土及出口市場強勁需求的回應，並續呼籲精簡監管以釋放產能。調查另顯示虹鱒產量跌56%，大比目魚及隆頭魚維持小規模養殖。全球供應面，挪威三文魚第39周出口量剛創歷史新高、價格連兩周回升至73.57克朗/公斤，挪威、蘇格蘭兩大產區供應同步改善，冰鮮及急凍三文魚中長線來貨充裕，本港高檔刺身級貨源議價空間料維持。" }
+      content: "國際水產媒體 SeafoodSource 10月2日報導，蘇格蘭政府最新發布的《2025年魚類養殖生產調查》（Scottish Fish Farm Production Survey 2025）顯示，2025年蘇格蘭大西洋三文魚產量增加3%（+5,836噸）至197,836噸；2023年級三文魚養成存活率由2022年級的61.8%升至68.8%，月均存活率達98.3%；魚苗（smolt）產量更大增20%（+890萬尾）至5,350萬尾。行業組織 Salmon Scotland 行政總裁 Tavish Scott 表示，新數據是對蘇格蘭三文魚的「又一次信心投票」，增產反映養殖商對本土及出口市場強勁需求的回應，並續呼籲精簡監管以釋放產能。調查另顯示虹鱒產量跌56%，大比目魚及隆頭魚維持小規模養殖。全球供應面，挪威三文魚第39周出口量剛創歷史新高、價格連兩周回升至73.57克朗/公斤，挪威、蘇格蘭兩大產區供應同步改善，冰鮮及急凍三文魚中長線來貨充裕，本港高檔刺身級貨源議價空間料維持。" },
+    { id: "n096", category: "政策法規", region: "中國香港", source: "香港中通社", date: "2026-10-01",
+      title: "港珠澳大橋供港鮮活食品10月1日起實行24小時通關 水產果蔬可錯峰補貨",
+      summary: "香港中通社10月1日報導：經港珠澳大橋供港鮮活食品通關時間由每天16小時延長至全天24小時；水產、果蔬可按採收運輸銷售節奏錯峰通關，今年1-8月大橋累計驗放供港鮮活食品超5.8萬噸。",
+      content: "香港中通社10月1日報導，經內地海關與香港食環署協商一致，自10月1日起，經港珠澳大橋供港鮮活食品通關時間由每天16小時延長至全天24小時。調整後，水產、果蔬等鮮活食品可根據採收、運輸和銷售節奏安排通關，滿足香港早市、午市、夜市等不同時段的補貨需求；供港鮮活食品企業表示，以往16小時通關若路上稍有延誤可能錯過當天出口檔期，政策升級後採收、運輸、發貨全鏈條安排更靈活，貨損和物流成本均見下降。針對水產、果蔬對時效要求較高的特點，港珠澳大橋海關安排具備相應資質人員輪值，並採取提前申報、綠色通道、優先查驗等措施，保障24小時查驗銜接。港珠澳大橋口岸自2023年開放全品類內地鮮活食品供港以來，通關時段已由最初每天8小時逐步延長至16小時，是次再升級為全天候；據統計，今年1至8月大橋累計驗放供港蔬菜、水果、鮮活水產等超過5.8萬噸。供港鮮活水產可全天候到港、在途等待與貨損降低，早市鮮活貨供應更穩，本港凍品商可評估以大橋渠道補充鮮活及冰鮮貨源的時效與成本優勢。" }
   ];
 
   /* ---------- 資訊來源標註與原文鏈接（全部已驗證可訪問） ---------- */
@@ -531,7 +535,8 @@
     n092: { source: "央視財經（環球時報轉載）", url: "https://mp.weixin.qq.com/s?__biz=MjM5MDk1NzQzMQ==&mid=2654157666&idx=1&sn=ce38084a5bb38ad9dd539f947aa13f20&chksm=bc8f80087154696975184de55469698bf9cc5849ce5e6909dc3ed43f177978c2693f2d19adf7&scene=27" },
     n093: { source: "生意社（農副頻道快訊）", url: "https://agr.100ppi.com/kx/list-837-13-1.html" },
     n094: { source: "SeafoodSource（英文）", url: "https://www.seafoodsource.com/news/ices-releases-advice-for-northeast-atlantic-pelagics-increasing-quotas-for-mackerel-herring-blue-whiting" },
-    n095: { source: "SeafoodSource（英文，引述蘇格蘭政府統計）", url: "https://www.seafoodsource.com/news/scottish-salmon-sector-achieves-increased-harvest-survival-rates" }
+    n095: { source: "SeafoodSource（英文，引述蘇格蘭政府統計）", url: "https://www.seafoodsource.com/news/scottish-salmon-sector-achieves-increased-harvest-survival-rates" },
+    n096: { source: "香港中通社", url: "https://www.hkcna.hk/hk/content/s6abe5ddde4b0a8d1ae418305.html" }
   };
   NEWS_DATA.forEach(function (n) {
     var s = NEWS_SOURCES[n.id];
