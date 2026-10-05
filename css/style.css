@@ -323,6 +323,8 @@ table.data tr:hover td { background: var(--line-soft); }
 
 /* 已讀標記：已讀條目淡化顯示 */
 .badge-read { background: #93a5b3; }
+/* 地區標籤（內地／國際新聞區分）：描邊樣式，與分類實心徽章區隔 */
+.badge-region { background: transparent; color: var(--ice-deep); border: 1px solid var(--ice-deep); }
 .news-item.read { opacity: .78; }
 .news-item.read h3 { color: var(--ink-soft); }
 
