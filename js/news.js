@@ -9,6 +9,7 @@ var NEWS = Store.getNews();
 var CATS = Store.getCategories();
 var curCat = "全部";
 var curQ = "";
+var curRegion = "全部";
 
 /* ---------- 已讀狀態（localStorage 持久保存，刷新不清除） ---------- */
 var ReadStore = {
@@ -51,6 +52,25 @@ function fmtRefreshTime(iso) {
   return pad(d.getDate()) + "/" + pad(d.getMonth() + 1) + "/" + d.getFullYear() +
     " " + pad(d.getHours()) + ":" + pad(d.getMinutes());
 }
+
+/* ---------- 地區篩選（內地新聞／國際新聞分頁） ---------- */
+var REGIONS = [
+  { key: "全部", label: "全部地區" },
+  { key: "內地新聞", label: "內地新聞" },
+  { key: "國際新聞", label: "國際新聞" }
+];
+function regionOf(n) { return n.region === "國際" ? "國際新聞" : "內地新聞"; }
+function renderRegionBar() {
+  document.getElementById("region-bar").innerHTML = REGIONS.map(function (r) {
+    return '<button class="chip' + (r.key === curRegion ? " on" : "") + '" data-region="' + r.key + '">' + r.label + "</button>";
+  }).join("");
+}
+document.getElementById("region-bar").addEventListener("click", function (e) {
+  if (e.target.tagName !== "BUTTON") return;
+  curRegion = e.target.dataset.region;
+  renderRegionBar();
+  renderList();
+});
 
 /* ---------- 分類按鈕 ---------- */
 function renderCatBar() {
@@ -104,12 +124,13 @@ function toggleSubAnalysis(btn) {
 function renderList() {
   /* Store.getNews() 已按發布日期倒序；同日期以 id 遞減，確保最新條目優先 */
   var rows = NEWS.filter(function (n) {
+    var okRegion = curRegion === "全部" || regionOf(n) === curRegion;
     var okCat = curCat === "全部" || n.category === curCat;
     var okQ = !curQ || (n.title + n.summary + n.content + n.region + n.source).indexOf(curQ) >= 0;
-    return okCat && okQ;
+    return okRegion && okCat && okQ;
   });
   document.getElementById("result-count").textContent =
-    "共 " + rows.length + " 則資訊" + (curCat !== "全部" ? "｜分類：" + curCat : "") + (curQ ? "｜關鍵字：" + curQ : "");
+    "共 " + rows.length + " 則資訊" + (curRegion !== "全部" ? "｜地區：" + curRegion : "") + (curCat !== "全部" ? "｜分類：" + curCat : "") + (curQ ? "｜關鍵字：" + curQ : "");
 
   var unread = 0;
   var html = rows.map(function (n) {
@@ -118,7 +139,7 @@ function renderList() {
     if (!isRead) unread++;
     return '<div class="news-item' + (isRead ? " read" : "") + '" data-id="' + n.id + '" onclick="toggleNews(this)">' +
       '<div class="meta"><span class="badge ' + badge + '">' + n.category + "</span>" +
-      "<span>" + n.region + "</span><span>｜</span>" +
+      '<span class="badge badge-region">' + n.region + "</span>" +
       "<span>發佈：" + Store.fmtDate(n.date) + "</span>" +
       (isRead ? '<span class="badge badge-read">已讀</span>' : "") + "</div>" +
       "<h3>" + n.title + "</h3>" +
@@ -203,6 +224,7 @@ function refreshNews() {
     /* 清除過期緩存：剔除已下架資訊的已讀記錄，避免殘留舊內容 */
     ReadStore.prune(NEWS.map(function (n) { return n.id; }));
     RefreshMeta.save();
+    renderRegionBar();
     renderCatBar();
     renderList();
     showRefreshStatus(true);
@@ -225,6 +247,7 @@ document.getElementById("q").addEventListener("keydown", function (e) {
   if (e.key === "Enter") { curQ = this.value.trim(); renderList(); }
 });
 
+renderRegionBar();
 renderCatBar();
 renderList();
 showRefreshStatus(false);
