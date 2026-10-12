@@ -46,7 +46,7 @@
     return rows;
   }
 
-  var PIG_FORECAST = { date: "2026-10-09", mainland: 2838, local: 100, total: 2938 };
+  var PIG_FORECAST = { date: "2026-10-12", mainland: 3096, local: 100, total: 3196 };
 
   /* ---------- 行業資訊分類 ---------- */
   var NEWS_CATEGORIES = ["價格行情", "政策法規", "關稅動態", "供應變化", "新技術應用"];
@@ -505,6 +505,30 @@
       title: "厄瓜多爾蝦產量持續急增 ProEcuador四出開拓新終端市場",
       summary: "SeafoodSource 10月8日報導：厄瓜多爾蝦產量持續快速增長，政府貿易機構ProEcuador貿易專員Juan Pablo Cuesta表示正積極為新增產能尋找終端市場，於中國、美國等傳統市場以外尋求多元化出路。",
       content: "SeafoodSource 10月8日報導（原文設付費牆，以下據公開摘要）：隨厄瓜多爾蝦產業快速擴張，政府貿易促進機構ProEcuador的貿易專員Juan Pablo Cuesta受訪表示，該機構正積極為持續增長的蝦產量尋找終端市場，在中國、美國等既有市場以外推動出口多元化。背景：厄瓜多爾為全球最大養殖蝦出口國之一，2026年上半年對華出口近50萬噸、按年增約21%，中國海關上半年蝦進口屢創季度新高；供應快速增長疊加美國關稅行動，令行業積極開拓新市場消化產能。對本港採購的啟示：厄瓜多爾白蝦供應過剩格局未變，對華低價到港貨料持續充裕，本港急凍白蝦採購議價空間維持；可留意其開拓其他市場的進度，若對華貨量被分流，低價窗口或收窄。" },
+    { id: "n114", category: "價格行情", region: "中國內地", source: "生意社（新浪財經轉載）", date: "2026-10-12",
+      title: "生意社生豬基準價10月12日報10.23元/公斤 與昨日持平 較月初微升0.29%",
+      summary: "生意社10月12日：生豬基準價10.23元/公斤，日漲幅0.00%，較月初（10.20元）微升0.29%；一年位置中低位（最低9.02／最高13.27／中位11.15）。10月9日曾升至10.28後回軟，節後豬價於低位窄幅震盪。",
+      content: "生意社10月12日訊：10月12日生意社生豬基準價為10.23元/公斤，日漲幅0.00%，與本月初（10.20元/公斤）相比上漲0.29%。年度統計顯示，當前價格處一年中低位，一年最低9.02元、最高13.27元、中位值11.15元、平均值10.93元。國慶假期後基準價走勢：10月8日及之前連日持平10.20元，10月9日回升至10.28元，10月12日回落至10.23元，節後豬價於低位區窄幅震盪，方向未明。對本港採購的啟示：內地毛豬價持續於一年低位區上落，凍豬肉成本暫穩；低位震盪期宜分批按需補貨，毋須追價，並可留意第四季低位時的凍豬入貨窗口。" },
+    { id: "n115", category: "價格行情", region: "中國內地", source: "農業農村部市場與信息化司", date: "2026-10-09",
+      title: "農業農村部200指數10月9日報114.78 肉類全線回落 大帶魚跌4.6%居降幅榜首",
+      summary: "農業農村部10月9日監測：200指數114.78，比昨天跌0.05點；菜籃子指數114.92跌0.06點。豬肉16.04元/公斤跌0.4%、牛肉71.82元跌1.8%、羊肉66.61元跌1.7%、白條雞17.25元跌1.4%、雞蛋10.00元跌0.7%；大帶魚40.42元/公斤跌4.6%居46品種降幅榜首、鯉魚13.72元跌3.0%、白鰢魚10.06元跌1.8%、鯽魚19.40元跌0.5%。",
+      content: "據農業農村部監測，10月9日「農產品批發價格200指數」為114.78，比昨天下降0.05個點，「菜籃子」產品批發價格指數為114.92，比昨天下降0.06個點。截至當日14:00，全國農產品批發市場豬肉平均價格16.04元/公斤，比昨天下降0.4%；牛肉71.82元/公斤，下降1.8%；羊肉66.61元/公斤，下降1.7%；雞蛋10.00元/公斤，下降0.7%；白條雞17.25元/公斤，下降1.4%。水產方面：大帶魚40.42元/公斤，比昨天下降4.6%，居46個重點監測品種降幅榜首；鯉魚13.72元/公斤，下降3.0%；白鰢魚10.06元/公斤，下降1.8%；鯽魚19.40元/公斤，下降0.5%。節後內地肉類及水產批發價全線回落，大帶魚單日急跌或反映東海開漁後到貨充裕。對本港採購的啟示：凍帶魚採購議價空間改善，短期不必急於入貨；肉類凍品節後走貨偏弱，報價續有下調壓力。（10月10-11日週末未發布）" },
+    { id: "n116", category: "政策法規", region: "國際", source: "SalmonBusiness（英文，引述青島日報專訪）", date: "2026-10-09",
+      title: "中國工程院院士包振民質疑深遠海養殖經濟性：「有裝備不等於有適合養的魚」",
+      summary: "SalmonBusiness 10月9日引述青島日報專訪：中國海洋大學教授、中國工程院院士包振民稱，深遠海養殖「當前最大問題是經濟可行性」，網箱及養殖工船高度依賴海水交換、建造運營成本高；大西洋鮭在中國水溫急變的淺海養殖需審慎評估；適合大規模離岸養殖的育成品種短缺。",
+      content: "SalmonBusiness 10月9日引述青島日報當日專訪：中國海洋大學教授、中國工程院院士、青島藍色種業研究院院長包振民警告，中國深遠海養殖必須證明經濟可行性：「當前最大的問題是令深遠海養殖在經濟上可行」。他指現有網箱及養殖工船高度依賴海水交換，建造及運營成本高，資本、飼料及魚苗成本必須下降；開發商往往先建裝備後確定適養品種，「有裝備不等於有適合養的魚」。大西洋鮭在中國沿岸淺海（水溫急變）養殖需審慎作技術及經濟評估，裝備設計應以魚類生物學需求為本。他又指出適合大規模離岸養殖的育成品種短缺，呼籲加強科研、商業投資與市場的聯結。背景：青島西海岸新區三文魚遺傳育種中心已於2026年5月動工，將應用分子育種及大西洋鮭性逆轉技術強化國內種源掌控；「國信1-2-2」養殖工船5月產出首批約3,000尾。對本港採購的啟示：內地深遠海三文魚養殖仍處「裝備先行、品種滯後」階段，國產三文魚短期難以放量，本港挪威、智利貨源主導格局不變；長線留意國產育種進度對價格的潛在影響。" },
+    { id: "n117", category: "政策法規", region: "國際", source: "SeafoodSource（英文）", date: "2026-10-09",
+      title: "Outlaw Ocean Project發布全球魚粉產業大規模調查報告及「Bait to Plate」追溯工具",
+      summary: "SeafoodSource 10月9日報導：Outlaw Ocean Project發布約24篇調查報告及「Bait to Plate」可追溯性工具，覆蓋數以千計漁船、加工廠、零售商及進口商，涉及數十個國家及逾1,000家魚粉廠，記錄魚粉供應鏈的環境及勞工權益問題。",
+      content: "SeafoodSource 10月9日報導（原文設付費牆，以下據公開摘要）：記者組織Outlaw Ocean Project發布兩打（約24篇）調查報告，並推出「Bait to Plate」可追溯性工具，覆蓋數以千計漁船、加工廠、零售商及進口商，涉及數十個國家及逾1,000家魚粉廠，系統記錄全球魚粉生產鏈的環境破壞及勞工權益問題。該調查或促使歐美零售及飼料企業加強魚粉原料來源審查。背景：魚粉供應鏈治理趨嚴之際，IFFO已預測2026年全球魚粉供應不足460萬噸（2016年來最低），秘魯第二鯷魚捕季亦傳或因厄爾尼諾取消。對本港採購的啟示：水產飼料成本中線易升難跌，間接支撐養殖魚蝦價格；採購養殖魚蝦產品時宜留意供應商飼料來源的合規追溯文件，避免捲入溯源爭議。" },
+    { id: "n118", category: "供應變化", region: "國際", source: "SalmonBusiness（英文，引述Sernapesca）", date: "2026-10-09",
+      title: "智利Multiexport麥哲倫區有害藻華致死約300噸三文魚 兩養殖場啟動應急預案",
+      summary: "SalmonBusiness 10月9日引述智利監管局Sernapesca：南部麥哲倫區Multiexport Patagonia兩養殖場因有害藻華（Leptocylindrus minimus超閾值）致死約300噸三文魚（Taraba 7約200噸、Taraba 8約100噸），10月8日啟動大規模死亡應急預案；監管局自9月中旬起監測該公司四個養殖場，已派員監督撈除處置。",
+      content: "SalmonBusiness 10月9日引述智利漁業水產監管局（Sernapesca）：智利南部麥哲倫區Multiexport Patagonia旗下兩個養殖場因有害藻華致死約300噸三文魚，初步估算Taraba 7約200噸、Taraba 8約100噸，兩場已於10月8日啟動大規模死亡應急預案。Sernapesca自9月中旬起監測該公司四個養殖場的藻類濃度升高，確認涉事藻種為Leptocylindrus minimus，濃度超出有害影響參考閾值；已派督察員監督死亡魚隻撈除、處理及處置，並核查公司應急預案執行情況。麥哲倫區主管Ximena Gallardo表示，Multiexport具備撈除及存放死亡魚隻的物流能力，有關工作已展開。聲明未量化財務影響，亦未表明損失會否影響收穫指引。對本港採購的啟示：事故規模相對智利全國年產量尚屬可控，惟年底智利收穫高峰前後供應擾動值得跟進；若藻華範圍擴大，智利三文魚報價或有反應，本港凍三文魚可維持正常周轉並留意產地通報。" },
+    { id: "n119", category: "供應變化", region: "國際", source: "SalmonBusiness（英文）", date: "2026-10-09",
+      title: "Nordic Aqua寧波陸基三文魚Q3收穫1,838噸按季增35% 存量已滿前兩期產能",
+      summary: "SalmonBusiness 10月9日報導：奧斯陸上市Nordic Aqua Partners寧波陸基（RAS）三文魚場Q3收穫1,838噸（上季1,362噸，增約35%）；平均規格4.4公斤HOG、95%達Superior級；產量2,233噸連續三季超2,000噸；9月末存量5,662噸達首兩期滿負荷；全年指引5,700-6,000噸。",
+      content: "SalmonBusiness 10月9日報導，奧斯陸上市的Nordic Aqua Partners於10月8日發布營運快報：位於中國寧波的陸基循環水（RAS）三文魚養殖場第三季收穫1,838噸（去頭去內臟計），較第二季的1,362噸增長約35%；平均收穫規格4.4公斤HOG（約5.3公斤活重），95%獲評Superior級。第三季產量達2,233噸，連續第三個季度超過2,000噸；9月末standing biomass為5,662噸，公司稱已相當於養殖場首兩期階段的滿負荷。公司報告魚類健康良好、存活率高、無明顯性成熟。首九個月累計收穫3,971噸（去內臟計）、產量6,687噸；全年收穫指引維持5,700至6,000噸。快報未披露售價，第三季全份業績將於11月12日公布。該公司以RAS系統供應大西洋鮭予中國市場。對本港採購的啟示：內地陸基三文魚產量穩步爬坡，華東市場新鮮直供增加或輕微分流進口冰鮮需求；對本港凍品影響有限，惟可作為內地三文魚供需的邊際變量留意。" },
   ];
 
   /* ---------- 資訊來源標註與原文鏈接（全部已驗證可訪問） ---------- */
@@ -621,7 +645,13 @@
     n110: { source: "農業農村部市場與信息化司", url: "http://scs.moa.gov.cn/jcyj/202610/t20261008_6488360.htm" },
     n111: { source: "SalmonBusiness（英文）", url: "https://www.salmonbusiness.com/norway-government-proposes-keeping-salmon-tax-price-council-through-2027/" },
     n112: { source: "SeafoodSource（英文，引述秘魯媒體）", url: "https://www.seafoodsource.com/news/peru-media-reports-second-anchovy-season-likely-to-be-cancelled-amid-el-ni-o" },
-    n113: { source: "SeafoodSource（英文）", url: "https://www.seafoodsource.com/news/as-ecuador-s-shrimp-industry-grows-proecuador-working-to-find-the-end-markets" }
+    n113: { source: "SeafoodSource（英文）", url: "https://www.seafoodsource.com/news/as-ecuador-s-shrimp-industry-grows-proecuador-working-to-find-the-end-markets" },
+    n114: { source: "生意社（新浪財經轉載）", url: "http://finance.sina.com.cn/money/future/agri/2026-10-12/doc-iniuxmtr7174538.shtml" },
+    n115: { source: "農業農村部市場與信息化司", url: "http://scs.moa.gov.cn/jcyj/202610/t20261009_6488408.htm" },
+    n116: { source: "SalmonBusiness（英文，引述青島日報專訪）", url: "https://www.salmonbusiness.com/leading-chinese-scientist-questions-economics-behind-offshore-farming-push/" },
+    n117: { source: "SeafoodSource（英文）", url: "https://www.seafoodsource.com/news/outlaw-ocean-project-releases-sweeping-new-reporting-on-problems-in-global-fishmeal-production" },
+    n118: { source: "SalmonBusiness（英文，引述Sernapesca）", url: "https://www.salmonbusiness.com/multiexport-algae-bloom-kills-an-estimated-300-tonnes-of-salmon-at-two-chilean-sites/" },
+    n119: { source: "SalmonBusiness（英文）", url: "https://www.salmonbusiness.com/nordic-aqua-quarterly-harvest-rises-35-at-chinese-land-based-producer/" }
   };
   NEWS_DATA.forEach(function (n) {
     var s = NEWS_SOURCES[n.id];
