@@ -641,6 +641,18 @@
       title: "越南巴沙魚原料價兩月升近兩成 9月出口額升18.6% 高位料延續至12月",
       summary: "越南巴沙魚9月出口額約2.14億美元升18.6%；永隆省10月5日原料報價34,000-35,000盾/公斤，較8月初升近20%；大規格魚斷檔疊加中國春節需求，原料價料高企至12月。",
       content: "SeafoodSource 10月19日報導：越南巴沙魚9月出口額約2.14億美元升18.6%，首九個月累計17.4億美元升10.7%（VASEP）；Q3產量估49.62萬噸升3.3%，惟供應仍然緊張。永隆省加工廠10月5日報價34,000-35,000越南盾/公斤（約1.31-1.35美元），較8月初升近20%；Siam Canadian稱9月收貨價達36,500盾/公斤的今年高位。魚苗價同期升逾20%，死亡率最高達60%，上一造虧損令農戶降低投放密度，造成目前大規格魚斷檔；部分農戶留魚養大至10盎司以上規格供應中國市場春節需求。新造魚料11月中起陸續達規格，惟中小規格仍緊，原料價料高企至12月。對本港採購的啟示：巴沙魚為本港及內地大宗凍魚進口品，原料價兩月升兩成且緊張延續至12月，疊加春節備貨——凍巴沙魚柳到岸價短期易升難跌，建議提前鎖定11-12月貨源。" },
+    { id: "n148", category: "價格行情", region: "中國內地", source: "農業農村部市場與信息化司", date: "2026-10-20",
+      title: "農業農村部200指數10月20日報111.78跌0.55 豬肉15.85元升0.7%重回15.8上方",
+      summary: "10月20日「農產品批發價格200指數」111.78，比昨天降0.55點；豬肉15.85元/公斤升0.7%重回15.8元上方；大帶魚41.88元跌2.8%終止連升。",
+      content: "農業農村部市場與信息化司10月20日監測：「農產品批發價格200指數」111.78，比昨天下降0.55個點；「菜籃子」產品批發價格指數111.39，降0.65個點。豬肉15.85元/公斤升0.7%（重回15.8元上方）；牛肉73.53元/公斤跌0.1%；羊肉68.32元/公斤升0.7%；白條雞17.23元/公斤升1.5%居升幅榜首；雞蛋9.57元/公斤升0.1%。水產品：大帶魚41.88元/公斤跌2.8%（終止連三個發布日升勢）；鯽魚19.41元/公斤跌0.4%；白鰱魚10.04元/公斤跌0.9%；鯉魚13.87元/公斤跌0.1%。對本港採購的啟示：豬肉在15.7-15.9元區間窄幅爭持，跌勢暫緩但未見反轉；大帶魚急升後回吐屬正常波動，秋汛供應下凍带鱼補貨可伺低吸；供港活豬均價$992與內地豬價低位互相呼應。" },
+    { id: "n149", category: "價格行情", region: "國際", source: "USDA AMS（英文）", date: "2026-10-20",
+      title: "USDA 10月20日摘要：分割綜合價78.53美元/擔跌0.86 五花腩89.67逆市反彈2.74",
+      summary: "美國10月20日豬肉分割綜合價78.53美元/擔，跌0.86續處80下方；五花腩89.67逆市升2.74，里脊79.82跌2.53、肋排144.31跌3.73；生豬議價加權均價65.94美元/擔重挫3.66。",
+      content: "USDA農業營銷局10月20日（周二）每日生豬豬肉摘要：豬肉分割綜合價（Carcass Cutout）78.53美元/擔，較前日跌0.86，續處80美元下方；部位分項——里脊79.82跌2.53、肩部（Butt）103.08跌2.56、肋排144.31跌3.73、後腿63.69跌1.58，惟五花腩89.67逆市升2.74、前肩（Picnic）64.68升0.72；成交296.59載。生豬方面，全國議價肉豬胴體基價加權平均65.94美元/擔，單日重挫3.66，成交11,325頭。當日聯邦檢驗屠宰估49.3萬頭（上周同期49.6萬、去年同期48.2萬）。對本港採購的啟示：美豬分割價連日於80美元下方尋底，唯五花腩（對港出口主要部位之一）連續第二日逆市反彈——美產凍腩仔到岸成本或已近短期低位，可留意補庫窗口。" },
+    { id: "n150", category: "政策法規", region: "國際", source: "SeafoodSource（英文，引愛爾蘭政府／IFI）", date: "2026-10-20",
+      title: "愛爾蘭啟動野生三文魚管理諮詢 迴游量50年由200萬尾跌至不足20萬",
+      summary: "愛爾蘭氣候、能源與環境部就野生大西洋三文魚管理展開公眾諮詢至10月30日：迴游產卵量由1970年代末200萬尾跌至不足20萬尾；擬將釣客每季限捕由7尾削至3尾。",
+      content: "SeafoodSource 10月20日報導：愛爾蘭氣候、能源與環境部就野生大西洋三文魚管理展開公眾諮詢，10月30日截止，結果將用於制定2027年漁季管理措施。國家內陸漁業局（IFI）數據顯示，由海洋迴游產卵的三文魚由1970年代末約200萬尾跌至現時不足20萬尾；IFI今年較早前的檢討歸因於氣候變暖及大型工程河道排水破壞棲息地。諮詢建議包括：釣客每季限捕由7尾削減至3尾、對存量未見增長的河流加強限制、以孵化場魚苗放流及建立野生三文魚基因庫；政府另以1.1億歐元「國家障礙計劃」拆除堰壩等河道障礙。保育組織Salmon Watch Ireland及釣魚聯會FISSTA趁機要求政府推動三文魚養殖由海上網箱轉為陸基系統，甚至停止發放新養殖牌照。對本港採購的啟示：屬野生三文魚保育政策，對養殖三文魚貿易無直接影響，但愛爾蘭養殖業面臨轉型壓力值得中長線留意。" },
   ];
 
   /* ---------- 資訊來源標註與原文鏈接（全部已驗證可訪問） ---------- */
@@ -791,7 +803,10 @@
     n144: { source: "SalmonBusiness（英文）", url: "https://www.salmonbusiness.com/canada-launches-e188-5-million-seafood-and-aquaculture-funding-programme/" },
     n145: { source: "SeafoodSource（英文，引秘魯生產部PRODUCE／IMARPE）", url: "https://www.seafoodsource.com/news/peru-officially-cancels-the-second-anchovy-season-of-2026" },
     n146: { source: "SeafoodSource（英文，引210 Analytics／Circana）", url: "https://www.seafoodsource.com/news/us-seafood-sales-grew-across-all-categories-in-september-despite-high-inflation" },
-    n147: { source: "SeafoodSource（英文，引VASEP／Siam Canadian）", url: "https://www.seafoodsource.com/news/raw-material-prices-in-vietnam-s-pangasius-sector-rise-as-supply-tightens-export-demand-grows" }
+    n147: { source: "SeafoodSource（英文，引VASEP／Siam Canadian）", url: "https://www.seafoodsource.com/news/raw-material-prices-in-vietnam-s-pangasius-sector-rise-as-supply-tightens-export-demand-grows" },
+    n148: { source: "農業農村部市場與信息化司", url: "http://scs.moa.gov.cn/jcyj/202610/t20261020_6488758.htm" },
+    n149: { source: "USDA AMS（英文）", url: "https://www.ams.usda.gov/mnreports/lsddhps.pdf" },
+    n150: { source: "SeafoodSource（英文，引愛爾蘭政府／IFI）", url: "https://www.seafoodsource.com/news/ireland-launches-consultation-on-management-of-wild-salmon-as-stocks-continue-to-plummet" }
   };
   NEWS_DATA.forEach(function (n) {
     var s = NEWS_SOURCES[n.id];
