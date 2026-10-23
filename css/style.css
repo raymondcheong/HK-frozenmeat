@@ -365,6 +365,29 @@ table.data tr:hover td { background: var(--line-soft); }
 .notice { background: #e6f4ea; border: 1px solid #a5d6a7; color: #2e7d32; padding: 12px 16px; border-radius: 8px; margin-bottom: 14px; font-weight: 700; }
 .notice.err { background: #fdecee; border-color: #f3b8be; color: #c62828; }
 
+/* ---------- 資料狀態：時間戳 / 空狀態 / 載入更多 ---------- */
+.data-stamp {
+  display: inline-block; font-size: .78rem; font-weight: 700;
+  color: var(--ice-deep); background: var(--line-soft);
+  border: 1px solid var(--line); border-radius: 20px;
+  padding: 3px 12px;
+}
+.data-stamp.stale { color: #a34a00; background: #fff4e5; border-color: #f0c893; }
+.data-line { margin-bottom: 10px; }
+.result-detail { display: inline-block; font-size: .8rem; color: var(--ink-soft); margin-left: 8px; }
+#result-count { display: flex; flex-wrap: wrap; gap: 6px 0; align-items: center; }
+
+.empty-state { text-align: center; padding: 40px 22px; color: var(--ink-soft); }
+.empty-state h3 { font-size: 1.05rem; color: var(--ice-dark); margin-bottom: 8px; }
+.empty-state p { font-size: .88rem; line-height: 1.6; margin-bottom: 16px; }
+.empty-icon { font-size: 2.2rem; color: var(--frost); line-height: 1; margin-bottom: 10px; }
+.empty-icon.spin { animation: emptyspin 1.6s linear infinite; }
+@keyframes emptyspin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.loading-state { border-style: dashed; }
+
+.load-more-wrap { text-align: center; margin: 6px 0 24px; }
+.load-more-wrap .btn { min-width: 220px; }
+
 /* ---------- 響應式 ---------- */
 @media (max-width: 900px) {
   .grid-3 { grid-template-columns: 1fr 1fr; }
@@ -384,4 +407,25 @@ table.data tr:hover td { background: var(--line-soft); }
   .refresh-status, .unread-count { text-align: center; }
   .news-error { flex-direction: column; align-items: stretch; text-align: center; }
   .news-error .btn { width: 100%; }
+  /* 篩選條：手機上改為橫向滾動，避免晶片擠壓成多行佔滿首屏 */
+  #region-bar, #cat-bar {
+    flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px; margin-bottom: 14px;
+  }
+  #region-bar .chip, #cat-bar .chip { flex: 0 0 auto; padding: 7px 14px; font-size: .85rem; }
+  /* 搜尋框：輸入與按鈕同行但按鈕不縮 */
+  .search-box { min-width: 0; }
+  .search-box .btn { padding: 10px 16px; font-size: .9rem; }
+  /* 新聞卡片：縮小內距、標題與內文字級，保持可讀 */
+  .news-item { padding: 14px 15px; margin-bottom: 12px; }
+  .news-item h3 { font-size: 1rem; line-height: 1.45; }
+  .news-item p { font-size: .85rem; }
+  .news-item .meta { font-size: .72rem; gap: 6px; }
+  .source-line { font-size: .76rem; }
+  /* 資料時間戳與篩選結果改為整行顯示，避免擠壓 */
+  #result-count { display: block; line-height: 1.9; }
+  .result-detail { display: block; margin-left: 0; }
+  .data-stamp { font-size: .74rem; }
+  .empty-state { padding: 30px 16px; }
+  .load-more-wrap .btn { width: 100%; }
 }

@@ -18,7 +18,7 @@ var Store = {
   /* 合併後的新聞列表（後台新增/修改優先） */
   getNews: function () {
     var c = this._custom();
-    var base = (SITE_DATA.news || []).filter(function (n) {
+    var base = ((window.SITE_DATA && window.SITE_DATA.news) || []).filter(function (n) {
       return (c.deletedNews || []).indexOf(n.id) < 0;
     });
     var edited = base.map(function (n) {
@@ -33,7 +33,7 @@ var Store = {
 
   getAnalysis: function () {
     var c = this._custom();
-    var base = (SITE_DATA.analysis || []).filter(function (a) {
+    var base = ((window.SITE_DATA && window.SITE_DATA.analysis) || []).filter(function (a) {
       return (c.deletedAnalysis || []).indexOf(a.id) < 0;
     });
     var edited = base.map(function (a) {
@@ -46,7 +46,7 @@ var Store = {
 
   getPig: function () {
     var c = this._custom();
-    var base = SITE_DATA.pig.slice();
+    var base = ((window.SITE_DATA && window.SITE_DATA.pig) || []).slice();
     (c.pigRows || []).forEach(function (row) {
       var idx = -1;
       base.forEach(function (r, i) { if (r.date === row.date) idx = i; });
@@ -57,12 +57,14 @@ var Store = {
 
   getCategories: function () {
     var c = this._custom();
-    return (c.categories && c.categories.length) ? c.categories : SITE_DATA.newsCategories.slice();
+    if (c.categories && c.categories.length) return c.categories;
+    return ((window.SITE_DATA && window.SITE_DATA.newsCategories) || []).slice();
   },
 
   getAnalysisTypes: function () {
     var c = this._custom();
-    return (c.analysisTypes && c.analysisTypes.length) ? c.analysisTypes : SITE_DATA.analysisTypes.slice();
+    if (c.analysisTypes && c.analysisTypes.length) return c.analysisTypes;
+    return ((window.SITE_DATA && window.SITE_DATA.analysisTypes) || []).slice();
   },
 
   fmtDate: function (iso) {
@@ -73,6 +75,104 @@ var Store = {
     return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 };
+
+/* ---------- 資料載入層（容錯 ＋ 自動更新） ---------- */
+/* 背景：data.js 以 <script> 直接載入時受 HTTP 快取（GitHub Pages max-age=600）
+   及瀏覽器磁碟快取影響，可能載入舊資料；若載入失敗，SITE_DATA 為 undefined，
+   頁面會整段腳本報錯而變成空白。此層負責：偵測是否就緒、偵測是否過期、
+   以 cache-busting 重新載入，並提供統一的空狀態／錯誤提示。 */
+var DataLoader = {
+  DATA_URL: "js/data.js",
+  _busy: false,
+
+  todayISO: function () {
+    var d = new Date();
+    function pad(n) { return (n < 10 ? "0" : "") + n; }
+    return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+  },
+
+  ready: function () {
+    return !!(window.SITE_DATA && window.SITE_DATA.news && window.SITE_DATA.news.length);
+  },
+
+  /* 資料內最新一則資訊的日期（YYYY-MM-DD） */
+  latestNewsDate: function () {
+    if (!this.ready()) return null;
+    var max = "";
+    window.SITE_DATA.news.forEach(function (n) { if (n.date && n.date > max) max = n.date; });
+    return max || null;
+  },
+
+  /* 資料是否明顯落後（落後超過一日才算過時；早上未發布當日新聞屬正常，
+     避免每次載入都誤判為「未更新」） */
+  isStale: function () {
+    var d = this.latestNewsDate();
+    if (!d) return false;
+    var t = new Date();
+    t.setDate(t.getDate() - 1);
+    function pad(n) { return (n < 10 ? "0" : "") + n; }
+    var cutoff = t.getFullYear() + "-" + pad(t.getMonth() + 1) + "-" + pad(t.getDate());
+    return d < cutoff;
+  },
+
+  /* 十分鐘內只自動檢查一次，避免每次開頁都重抓資料 */
+  CHECK_KEY: "hkmeat_data_checked_v1",
+  recentlyChecked: function () {
+    try {
+      var t = parseInt(localStorage.getItem(this.CHECK_KEY), 10);
+      return !!t && (Date.now() - t) < 10 * 60 * 1000;
+    } catch (e) { return false; }
+  },
+  markChecked: function () {
+    try { localStorage.setItem(this.CHECK_KEY, String(Date.now())); } catch (e) {}
+  },
+
+  /* 以時間戳重新載入 data.js（繞過 HTTP 快取） */
+  load: function (cb) {
+    if (this._busy) { cb(new Error("資料正在載入，請稍候")); return; }
+    this._busy = true;
+    var self = this;
+    var s = document.createElement("script");
+    s.src = this.DATA_URL + "?ts=" + Date.now();
+    s.async = true;
+    s.onload = function () { self._busy = false; self.markChecked(); cb(null); };
+    s.onerror = function () { self._busy = false; cb(new Error("無法載入資料檔 js/data.js")); };
+    document.head.appendChild(s);
+  },
+
+  /* 資料過期時才重新載入；cb(updated) 表示是否真的更新過 */
+  ensureFresh: function (cb) {
+    if (!this.isStale() || this.recentlyChecked()) { cb(false); return; }
+    var self = this;
+    this.load(function (err) { cb(!err && self.ready()); });
+  }
+};
+
+/* ---------- 空狀態 / 載入中 / 資料時間戳（全站共用） ---------- */
+function emptyStateHTML(title, desc, btnId, btnText) {
+  return '<div class="card empty-state">' +
+    '<div class="empty-icon">◌</div>' +
+    '<h3>' + title + "</h3>" +
+    (desc ? "<p>" + desc + "</p>" : "") +
+    (btnId ? '<button class="btn btn-sm" id="' + btnId + '">' + (btnText || "重新載入") + "</button>" : "") +
+    "</div>";
+}
+
+function loadingStateHTML(text) {
+  return '<div class="card empty-state loading-state">' +
+    '<div class="empty-icon spin">◌</div>' +
+    "<h3>" + (text || "資料載入中…") + "</h3>" +
+    "<p>正在讀取最新行業資訊，請稍候。</p></div>";
+}
+
+/* 資料時間戳：讓用戶一眼看到資料是否最新 */
+function dataStampHTML(latestDate, count) {
+  if (!latestDate) return '<span class="data-stamp stale">資料日期未明</span>';
+  var stale = DataLoader.isStale();
+  return '<span class="data-stamp' + (stale ? " stale" : "") + '">資料更新至 ' +
+    Store.fmtDate(latestDate) + (typeof count === "number" ? "｜共 " + count + " 則" : "") +
+    (stale ? "（可能未更新，請按「重新整理資訊」）" : "") + "</span>";
+}
 
 /* ---------- 頁首 / 頁尾 ---------- */
 function renderChrome(active) {

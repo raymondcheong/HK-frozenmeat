@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>行業資訊｜五豐行情</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=20261023">
 </head>
 <body>
 <header id="site-header"></header>
@@ -34,13 +34,16 @@
   </div>
 
   <p id="result-count" style="font-size:.85rem;color:#666;margin-bottom:12px;"></p>
-  <div id="news-list"></div>
+  <div id="news-list">
+    <div class="card empty-state loading-state"><div class="empty-icon spin">◌</div><h3>正在載入最新資訊…</h3><p>如長時間未顯示，請按「重新整理資訊」。</p></div>
+  </div>
 
   <!-- 新聞來源清單 -->
   <div class="card" id="sources-card" style="margin-top:30px;">
     <h2 id="sources-toggle" style="cursor:pointer;">新聞來源清單（含國際來源）　<span id="sources-arrow" style="float:right;font-size:.9rem;color:var(--ice);">展開 ▼</span></h2>
     <div id="sources-body" style="display:none;"></div>
   </div>
+  <noscript><div class="notice err">本頁需要啟用 JavaScript 才能顯示行業資訊。請於瀏覽器設定中開啟後重新載入。</div></noscript>
 </main>
 
 <footer class="footer" id="site-footer"></footer>

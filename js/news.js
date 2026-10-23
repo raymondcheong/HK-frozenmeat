@@ -1,15 +1,17 @@
 /* =====================================================
    行業資訊頁
-   功能：分類/搜尋篩選、發布時間倒序、手動刷新（載入狀態＋
-   錯誤重試）、已讀標記（跨刷新保留）、過期緩存清理
+   功能：分類/搜尋/地區篩選、發布時間倒序、分頁載入、
+   容錯載入（資料檔失敗可重試）、資料時間戳、已讀標記
    ===================================================== */
 renderChrome("news.html");
 
-var NEWS = Store.getNews();
-var CATS = Store.getCategories();
+var NEWS = [];
+var CATS = [];
 var curCat = "全部";
 var curQ = "";
 var curRegion = "全部";
+var PAGE_SIZE = 20;   /* 每頁顯示則數：避免一次渲染全部條目（含大量連結檢測）拖慢手機 */
+var shown = PAGE_SIZE;
 
 /* ---------- 已讀狀態（localStorage 持久保存，刷新不清除） ---------- */
 var ReadStore = {
@@ -68,6 +70,7 @@ function renderRegionBar() {
 document.getElementById("region-bar").addEventListener("click", function (e) {
   if (e.target.tagName !== "BUTTON") return;
   curRegion = e.target.dataset.region;
+  shown = PAGE_SIZE;
   renderRegionBar();
   renderList();
 });
@@ -82,6 +85,7 @@ function renderCatBar() {
 document.getElementById("cat-bar").addEventListener("click", function (e) {
   if (e.target.tagName !== "BUTTON") return;
   curCat = e.target.dataset.cat;
+  shown = PAGE_SIZE;
   renderCatBar();
   renderList();
 });
@@ -122,6 +126,21 @@ function toggleSubAnalysis(btn) {
 }
 
 function renderList() {
+  var listBox = document.getElementById("news-list");
+  var countBox = document.getElementById("result-count");
+
+  /* 情況一：完全沒有資料（載入失敗或資料檔為空）→ 明確空狀態，不留白 */
+  if (!NEWS.length) {
+    countBox.innerHTML = dataStampHTML(null, 0);
+    listBox.innerHTML = emptyStateHTML(
+      "暫未載入任何資訊",
+      "可能是網絡連線問題或資料檔未更新。請按下方按鈕重新載入，或稍後再試。",
+      "btn-empty-retry", "重新載入資訊");
+    var rb = document.getElementById("btn-empty-retry");
+    if (rb) rb.addEventListener("click", refreshNews);
+    return;
+  }
+
   /* Store.getNews() 已按發布日期倒序；同日期以 id 遞減，確保最新條目優先 */
   var rows = NEWS.filter(function (n) {
     var okRegion = curRegion === "全部" || regionOf(n) === curRegion;
@@ -129,11 +148,31 @@ function renderList() {
     var okQ = !curQ || (n.title + n.summary + n.content + n.region + n.source).indexOf(curQ) >= 0;
     return okRegion && okCat && okQ;
   });
-  document.getElementById("result-count").textContent =
-    "共 " + rows.length + " 則資訊" + (curRegion !== "全部" ? "｜地區：" + curRegion : "") + (curCat !== "全部" ? "｜分類：" + curCat : "") + (curQ ? "｜關鍵字：" + curQ : "");
+
+  countBox.innerHTML = dataStampHTML(DataLoader.latestNewsDate(), NEWS.length) +
+    '<span class="result-detail">篩選結果 ' + rows.length + " 則" +
+    (curRegion !== "全部" ? "｜" + curRegion : "") +
+    (curCat !== "全部" ? "｜" + curCat : "") +
+    (curQ ? "｜關鍵字：" + curQ : "") +
+    (rows.length > shown ? "｜已顯示最新 " + shown + " 則" : "") + "</span>";
+
+  /* 情況二：有資料但篩選無結果 → 引導調整條件 */
+  if (!rows.length) {
+    listBox.innerHTML = emptyStateHTML(
+      "找不到符合條件的資訊",
+      "請嘗試其他關鍵字，或將地區／分類切換回「全部」。",
+      "btn-clear-filter", "清除篩選條件");
+    var cb = document.getElementById("btn-clear-filter");
+    if (cb) cb.addEventListener("click", function () {
+      curQ = ""; curCat = "全部"; curRegion = "全部"; shown = PAGE_SIZE;
+      document.getElementById("q").value = "";
+      renderRegionBar(); renderCatBar(); renderList();
+    });
+    return;
+  }
 
   var unread = 0;
-  var html = rows.map(function (n) {
+  var html = rows.slice(0, shown).map(function (n) {
     var badge = CAT_BADGE[n.category] || "badge-grey";
     var isRead = ReadStore.has(n.id);
     if (!isRead) unread++;
@@ -147,19 +186,41 @@ function renderList() {
       "<p>" + n.summary + "</p>" +
       '<div class="analysis-body">' + String(n.content).replace(/\n/g, "<br>") + analysisBlock(n.id) + "</div>" +
       '<span class="toggle-btn">閱讀全文 ▼</span></div>';
-  }).join("") || '<div class="card" style="text-align:center;padding:40px;">找不到相關資訊，請嘗試其他關鍵字或分類。</div>';
+  }).join("");
 
-  document.getElementById("news-list").innerHTML = html;
+  if (rows.length > shown) {
+    html += '<div class="load-more-wrap"><button class="btn btn-gold" id="btn-more">載入更多（尚有 ' +
+      (rows.length - shown) + " 則）</button></div>";
+  }
+
+  listBox.innerHTML = html;
+
+  var more = document.getElementById("btn-more");
+  if (more) more.addEventListener("click", function () {
+    shown += PAGE_SIZE;
+    renderList();
+    var anchor = document.getElementById("btn-more");
+    if (anchor) anchor.scrollIntoView({ block: "center" });
+  });
+
   document.getElementById("unread-count").textContent =
     unread > 0 ? "未讀 " + unread + " 則" : "全部已讀";
 
+  /* 只檢測已渲染的連結，避免一次發出上百個請求拖慢頁面 */
   checkSourceLinks();
 }
 
 function toggleNews(el) {
   el.classList.toggle("open");
-  var btn = el.querySelector(":scope > .toggle-btn");
-  btn.textContent = el.classList.contains("open") ? "收起 ▲" : "閱讀全文 ▼";
+  /* 不用 :scope（部分舊版流動瀏覽器不支援），改為只取直接子節點 */
+  var btn = null;
+  for (var i = 0; i < el.children.length; i++) {
+    if (el.children[i].className && el.children[i].className.indexOf("toggle-btn") >= 0) {
+      btn = el.children[i];
+      break;
+    }
+  }
+  if (btn) btn.textContent = el.classList.contains("open") ? "收起 ▲" : "閱讀全文 ▼";
   /* 展開閱讀即標記已讀（狀態保存於 localStorage，刷新後保留） */
   if (el.classList.contains("open")) {
     var id = el.getAttribute("data-id");
@@ -196,42 +257,38 @@ function hideError() {
   document.getElementById("news-error").style.display = "none";
 }
 
-function showRefreshStatus(fresh) {
+function showRefreshStatus() {
+  var latest = DataLoader.latestNewsDate();
   var t = fmtRefreshTime(RefreshMeta.get());
-  document.getElementById("refresh-status").textContent =
-    t ? "最後更新：" + t : "";
+  var parts = [];
+  if (latest) parts.push("資料日期 " + Store.fmtDate(latest));
+  if (t) parts.push("最後檢查 " + t);
+  document.getElementById("refresh-status").textContent = parts.join("｜");
 }
 
 function refreshNews() {
-  if (!window.fetch) {
+  if (!window.fetch && !document.createElement) {
     showError("此瀏覽器不支援即時更新，請重新載入頁面。");
     return;
   }
   setLoading(true);
   hideError();
-  /* cache-busting + no-store：強制越過 HTTP 緩存取最新 data.js */
-  fetch("js/data.js?ts=" + Date.now(), { cache: "no-store" }).then(function (r) {
-    if (!r.ok) throw new Error("伺服器回應 " + r.status);
-    return r.text();
-  }).then(function (code) {
-    /* 重新執行數據文件，更新 SITE_DATA */
-    new Function(code)();
-    if (!window.SITE_DATA || !SITE_DATA.news || !SITE_DATA.news.length) {
-      throw new Error("資料格式異常");
+  /* 以 <script> 重新載入 data.js 並加時間戳，強制越過 HTTP 快取 */
+  DataLoader.load(function (err) {
+    setLoading(false);
+    if (err || !DataLoader.ready()) {
+      showError("資訊更新失敗：" + (err ? err.message : "資料格式異常") + "。請檢查網絡連線後按「重試」。");
+      return;
     }
     NEWS = Store.getNews();
     CATS = Store.getCategories();
-    /* 清除過期緩存：剔除已下架資訊的已讀記錄，避免殘留舊內容 */
+    shown = PAGE_SIZE;
     ReadStore.prune(NEWS.map(function (n) { return n.id; }));
     RefreshMeta.save();
     renderRegionBar();
     renderCatBar();
     renderList();
-    showRefreshStatus(true);
-    setLoading(false);
-  }).catch(function (err) {
-    setLoading(false);
-    showError("資訊更新失敗：" + err.message + "。請檢查網絡連線後按「重試」。");
+    showRefreshStatus();
   });
 }
 
@@ -241,22 +298,64 @@ document.getElementById("btn-retry").addEventListener("click", refreshNews);
 /* ---------- 搜尋 ---------- */
 document.getElementById("btn-search").addEventListener("click", function () {
   curQ = document.getElementById("q").value.trim();
+  shown = PAGE_SIZE;
   renderList();
 });
 document.getElementById("q").addEventListener("keydown", function (e) {
-  if (e.key === "Enter") { curQ = this.value.trim(); renderList(); }
+  if (e.key === "Enter") { curQ = this.value.trim(); shown = PAGE_SIZE; renderList(); }
 });
 
-renderRegionBar();
-renderCatBar();
-renderList();
-showRefreshStatus(false);
+/* ---------- 啟動：先確認資料就緒，未就緒則自動補載 ---------- */
+(function boot() {
+  var listBox = document.getElementById("news-list");
+
+  function paint() {
+    NEWS = Store.getNews();
+    CATS = Store.getCategories();
+    renderRegionBar();
+    renderCatBar();
+    renderList();
+    showRefreshStatus();
+  }
+
+  if (DataLoader.ready()) {
+    paint();
+    RefreshMeta.save();
+    /* 資料落後於今日 → 背景靜默更新一次（例如瀏覽器快取了昨日的 data.js） */
+    DataLoader.ensureFresh(function (updated) {
+      if (!updated) return;
+      NEWS = Store.getNews();
+      CATS = Store.getCategories();
+      shown = PAGE_SIZE;
+      renderRegionBar();
+      renderCatBar();
+      renderList();
+      showRefreshStatus();
+    });
+    return;
+  }
+
+  /* 首次載入失敗（SITE_DATA 不存在）→ 顯示載入中並自動重試一次 */
+  listBox.innerHTML = loadingStateHTML("正在載入最新資訊…");
+  document.getElementById("result-count").innerHTML = "";
+  DataLoader.load(function (err) {
+    if (err || !DataLoader.ready()) {
+      NEWS = []; CATS = [];
+      renderList();
+      showError("資料檔載入失敗：" + (err ? err.message : "內容為空") + "。請按「重試」重新載入。");
+      return;
+    }
+    paint();
+    RefreshMeta.save();
+  });
+})();
 
 /* ---------- 新聞來源清單（結構化渲染） ---------- */
 (function () {
   if (!window.NEWS_SOURCE_REGISTRY) return;
   var REGIONS = ["香港", "中國內地", "南美洲", "北美洲", "歐洲"];
   var body = document.getElementById("sources-body");
+  if (!body) return;
 
   body.innerHTML =
     '<p style="font-size:.82rem;color:#666;margin-bottom:14px;">每日采編任務按此清單選材。非中文來源已標示原文語言，引用時譯為繁體中文並註明原始出處。</p>' +
