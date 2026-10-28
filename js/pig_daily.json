@@ -1,1051 +1,527 @@
 [
-
   {
-
     "date": "2026-08-25",
-
     "mainland": 3341,
-
     "local": 126,
-
     "total": 3467,
-
     "high": 1600,
-
     "low": 750,
-
     "avg": 913,
-
     "forecast": {
-
       "mainland": 2736,
-
       "local": 100,
-
       "total": 2836
-
     }
-
   },
-
   {
-
     "date": "2026-08-26",
-
     "mainland": 3112,
-
     "local": 123,
-
     "total": 3235,
-
     "high": 1600,
-
     "low": 750,
-
     "avg": 933,
-
     "forecast": {
-
       "mainland": 2748,
-
       "local": 100,
-
       "total": 2848
-
     }
-
   },
-
   {
-
     "date": "2026-08-27",
-
     "mainland": 2988,
-
     "local": 122,
-
     "total": 3110,
-
     "high": 1650,
-
     "low": 950,
-
     "avg": 1037,
-
     "forecast": {
-
       "mainland": 2816,
-
       "local": 100,
-
       "total": 2916
-
     }
-
   },
-
   {
-
     "date": "2026-08-28",
-
     "mainland": 3005,
-
     "local": 315,
-
     "total": 3320,
-
     "high": 1650,
-
     "low": 950,
-
     "avg": 1052,
-
     "note": "食環署標註：資料曾被修訂。"
-
   },
-
   {
-
     "date": "2026-08-29",
-
     "mainland": 3194,
-
     "local": 132,
-
     "total": 3326,
-
     "high": 1650,
-
     "low": 850,
-
     "avg": 1030
-
   },
-
   {
-
     "date": "2026-08-30",
-
     "mainland": 3681,
-
     "local": 160,
-
     "total": 3841,
-
     "high": 1650,
-
     "low": 850,
-
     "avg": 1030,
-
     "forecast": {
-
       "mainland": 2940,
-
       "local": 100,
-
       "total": 3040
-
     }
-
   },
-
   {
-
     "date": "2026-09-02",
-
     "mainland": 3363,
-
     "local": 272,
-
     "total": 3635,
-
     "high": 1650,
-
     "low": 950,
-
     "avg": 1079,
-
     "forecast": {
-
       "mainland": 2952,
-
       "local": 100,
-
       "total": 3052
-
     }
-
   },
-
   {
-
     "date": "2026-09-03",
-
     "mainland": 3352,
-
     "local": 159,
-
     "total": 3511,
-
     "high": 1650,
-
     "low": 950,
-
     "avg": 1058,
-
     "forecast": {
-
       "mainland": 2976,
-
       "local": 100,
-
       "total": 3076
-
     }
-
   },
-
   {
-
     "date": "2026-09-06",
-
     "mainland": 3646,
-
     "local": 158,
-
     "total": 3804,
-
     "high": 1650,
-
     "low": 850,
-
     "avg": 1022,
-
     "forecast": {
-
       "mainland": 3060,
-
       "local": 100,
-
       "total": 3160
-
     },
-
     "note": "9月4至5日食環署頁面未見更新，最新數據為9月6日（週日）。"
-
   },
-
   {
-
     "date": "2026-09-07",
-
     "mainland": 3633,
-
     "local": 184,
-
     "total": 3817,
-
     "high": 1300,
-
     "low": 850,
-
     "avg": 1010,
-
     "forecast": {
-
       "mainland": 3060,
-
       "local": 100,
-
       "total": 3160
-
     }
-
   },
-
   {
-
     "date": "2026-09-08",
-
     "mainland": 3549,
-
     "local": 146,
-
     "total": 3695,
-
     "high": 1650,
-
     "low": 800,
-
     "avg": 1008,
-
     "forecast": {
-
       "mainland": 2964,
-
       "local": 100,
-
       "total": 3064
-
     }
-
   },
-
   {
-
     "date": "2026-09-09",
-
     "mainland": 3386,
-
     "local": 145,
-
     "total": 3531,
-
     "high": 1650,
-
     "low": 850,
-
     "avg": 1015,
-
     "forecast": {
-
       "mainland": 3084,
-
       "local": 100,
-
       "total": 3184
-
     }
-
   },
-
   {
-
     "date": "2026-09-10",
-
     "mainland": 3334,
-
     "local": 137,
-
     "total": 3471,
-
     "high": 1650,
-
     "low": 750,
-
     "avg": 985,
-
     "forecast": {
-
       "mainland": 2856,
-
       "local": 100,
-
       "total": 2956
-
     }
-
   },
-
   {
-
     "date": "2026-09-13",
-
     "mainland": 3668,
-
     "local": 221,
-
     "total": 3889,
-
     "high": 1300,
-
     "low": 850,
-
     "avg": 1020,
-
     "forecast": {
-
       "mainland": 3072,
-
       "local": 100,
-
       "total": 3172
-
     }
-
   },
-
   {
-
     "date": "2026-09-14",
-
     "mainland": 3285,
-
     "local": 271,
-
     "total": 3556,
-
     "high": 1650,
-
     "low": 1000,
-
     "avg": 1161,
-
     "forecast": {
-
       "mainland": 2998,
-
       "local": 100,
-
       "total": 3098
-
     }
-
   },
-
   {
-
     "date": "2026-09-15",
-
     "mainland": 3581,
-
     "local": 161,
-
     "total": 3742,
-
     "high": 1650,
-
     "low": 800,
-
     "avg": 1014,
-
     "forecast": {
-
       "mainland": 2798,
-
       "local": 100,
-
       "total": 2898
-
     }
-
   },
-
   {
-
     "date": "2026-09-16",
-
     "mainland": 3303,
-
     "local": 146,
-
     "total": 3449,
-
     "high": 1650,
-
     "low": 850,
-
     "avg": 1013,
-
     "forecast": {
-
       "mainland": 2980,
-
       "local": 100,
-
       "total": 3080
-
     }
-
   },
-
   {
-
     "date": "2026-09-17",
-
     "mainland": 3163,
-
     "local": 137,
-
     "total": 3300,
-
     "high": 1650,
-
     "low": 850,
-
     "avg": 1023,
-
     "forecast": {
-
       "mainland": 3142,
-
       "local": 100,
-
       "total": 3242
-
     }
-
   },
-
   {
-
     "date": "2026-09-20",
-
     "mainland": 3776,
-
     "local": 184,
-
     "total": 3960,
-
     "high": 1520,
-
     "low": 800,
-
     "avg": 1007,
-
     "forecast": {
-
       "mainland": 3078,
-
       "local": 100,
-
       "total": 3178
-
     }
-
   },
-
   {
-
     "date": "2026-09-22",
-
     "mainland": 3391,
-
     "local": 153,
-
     "total": 3544,
-
     "high": 1650,
-
     "low": 850,
-
     "avg": 1020,
-
     "forecast": {
-
       "mainland": 2832,
-
       "local": 100,
-
       "total": 2932
-
     }
-
   },
-
   {
-
     "date": "2026-09-23",
-
     "mainland": 3441,
-
     "local": 164,
-
     "total": 3605,
-
     "high": 1650,
-
     "low": 850,
-
     "avg": 1015,
-
     "forecast": {
-
       "mainland": 2850,
-
       "local": 100,
-
       "total": 2950
-
     }
-
   },
-
   {
-
     "date": "2026-09-29",
-
     "mainland": 3106,
-
     "local": 229,
-
     "total": 3335,
-
     "high": 1650,
-
     "low": 950,
-
     "avg": 1032,
-
     "forecast": {
-
       "mainland": 2868,
-
       "local": 100,
-
       "total": 2968
-
     }
-
   },
-
   {
-
     "date": "2026-10-01",
-
     "mainland": 3061,
-
     "local": 158,
-
     "total": 3219,
-
     "high": 1650,
-
     "low": 850,
-
     "avg": 1012,
-
     "forecast": {
-
       "mainland": 2868,
-
       "local": 100,
-
       "total": 2968
-
     }
-
   },
-
   {
-
     "date": "2026-10-04",
-
     "mainland": 3683,
-
     "local": 234,
-
     "total": 3917,
-
     "high": 1380,
-
     "low": 850,
-
     "avg": 1020,
-
     "forecast": {
-
       "mainland": 2964,
-
       "local": 100,
-
       "total": 3064
-
     }
-
   },
-
   {
-
     "date": "2026-10-05",
-
     "mainland": 3499,
-
     "local": 174,
-
     "total": 3673,
-
     "high": 1650,
-
     "low": 850,
-
     "avg": 1022,
-
     "forecast": {
-
       "mainland": 2964,
-
       "local": 100,
-
       "total": 3064
-
     }
-
   },
-
   {
-
     "date": "2026-10-06",
-
     "mainland": 3404,
-
     "local": 214,
-
     "total": 3618,
-
     "high": 1390,
-
     "low": 850,
-
     "avg": 1021,
-
     "forecast": {
-
       "mainland": 2976,
-
       "local": 100,
-
       "total": 3076
-
     }
-
   },
-
   {
-
     "date": "2026-10-07",
-
     "mainland": 3335,
-
     "local": 216,
-
     "total": 3551,
-
     "high": 1401,
-
     "low": 850,
-
     "avg": 1024,
-
     "forecast": {
-
       "mainland": 2856,
-
       "local": 100,
-
       "total": 2956
-
     }
-
   },
-
   {
-
     "date": "2026-10-08",
-
     "mainland": 3204,
-
     "local": 213,
-
     "total": 3417,
-
     "high": 1652,
-
     "low": 950,
-
     "avg": 1040,
-
     "forecast": {
-
       "mainland": 2838,
-
       "local": 100,
-
       "total": 2938
-
     }
-
   },
-
   {
-
     "date": "2026-10-11",
-
     "mainland": 3678,
-
     "local": 204,
-
     "total": 3882,
-
     "high": 1650,
-
     "low": 850,
-
     "avg": 1021,
-
     "forecast": {
-
       "mainland": 3096,
-
       "local": 100,
-
       "total": 3196
-
     }
-
   },
-
   {
-
     "date": "2026-10-12",
-
     "mainland": 3428,
-
     "local": 194,
-
     "total": 3622,
-
     "high": 1600,
-
     "low": 850,
-
     "avg": 1019,
-
     "forecast": {
-
       "mainland": 2952,
-
       "local": 100,
-
       "total": 3052
-
     }
-
   },
-
   {
-
     "date": "2026-10-13",
-
     "mainland": 3450,
-
     "local": 185,
-
     "total": 3635,
-
     "high": 1650,
-
     "low": 850,
-
     "avg": 1008,
-
     "forecast": {
-
       "mainland": 3060,
-
       "local": 100,
-
       "total": 3160
-
     }
-
   },
-
   {
-
     "date": "2026-10-14",
-
     "mainland": 3497,
-
     "local": 176,
-
     "total": 3673,
-
     "high": 1650,
-
     "low": 750,
-
     "avg": 972,
-
     "forecast": {
-
       "mainland": 2844,
-
       "local": 100,
-
       "total": 2944
-
     }
-
   },
-
   {
-
     "date": "2026-10-15",
-
     "mainland": 3065,
-
     "local": 160,
-
     "total": 3225,
-
     "high": 1650,
-
     "low": 800,
-
     "avg": 997,
-
     "forecast": {
-
       "mainland": 2748,
-
       "local": 100,
-
       "total": 2848
-
     }
-
   },
-
   {
-
     "date": "2026-10-19",
-
     "mainland": 3429,
-
     "local": 212,
-
     "total": 3641,
-
     "high": 1300,
-
     "low": 850,
-
     "avg": 996,
-
     "forecast": {
-
       "mainland": 2976,
-
       "local": 100,
-
       "total": 3076
-
     }
-
   },
-
   {
-
     "date": "2026-10-20",
-
     "mainland": 3382,
-
     "local": 181,
-
     "total": 3563,
-
     "high": 1650,
-
     "low": 800,
-
     "avg": 992,
-
     "forecast": {
-
       "mainland": 2976,
-
       "local": 100,
-
       "total": 3076
-
     }
-
   },
-
   {
-
     "date": "2026-10-21",
-
     "mainland": 3382,
-
     "local": 167,
-
     "total": 3549,
-
     "high": 1650,
-
     "low": 750,
-
     "avg": 977,
-
     "forecast": {
-
       "mainland": 2736,
-
       "local": 100,
-
       "total": 2836
-
     }
-
   },
-
   {
-
     "date": "2026-10-22",
-
     "mainland": 3102,
-
     "local": 155,
-
     "total": 3257,
-
     "high": 1650,
-
     "low": 850,
-
     "avg": 999,
-
     "forecast": {
-
       "mainland": 2844,
-
       "local": 100,
-
       "total": 2944
-
     }
-
   },
-
   {
-
     "date": "2026-10-25",
-
     "mainland": 3549,
-
     "local": 202,
-
     "total": 3751,
-
     "high": 1570,
-
     "low": 850,
-
     "avg": 1000,
-
     "forecast": {
-
       "mainland": 2976,
-
       "local": 100,
-
       "total": 3076
-
     }
-
   },
   {
     "date": "2026-10-26",
@@ -1059,6 +535,20 @@
       "mainland": 2924,
       "local": 100,
       "total": 3024
+    }
+  },
+  {
+    "date": "2026-10-27",
+    "mainland": 3250,
+    "local": 183,
+    "total": 3433,
+    "high": 1650,
+    "low": 850,
+    "avg": 1028,
+    "forecast": {
+      "mainland": 2856,
+      "local": 100,
+      "total": 2956
     }
   }
 ]
