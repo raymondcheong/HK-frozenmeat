@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B端商城運營分析報告｜週報總覽</title>
+<style>
+  :root{
+    --bg:#0f172a; --panel:rgba(226,232,240,0.04); --line:rgba(0,255,245,0.18);
+    --cyan:#00fff5; --text:#e2e8f0; --muted:rgba(226,232,240,0.6);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;padding:48px 24px;background:var(--bg);color:var(--text);
+       font-family:"Microsoft JhengHei","PingFang TC",sans-serif;}
+  .wrap{max-width:880px;margin:0 auto;}
+  h1{font-size:1.5rem;margin:0 0 6px;color:var(--cyan);letter-spacing:.5px;}
+  .sub{color:var(--muted);font-size:.86rem;line-height:1.7;margin-bottom:28px;}
+  .latest{display:flex;align-items:center;justify-content:space-between;gap:16px;
+          padding:16px 20px;margin-bottom:28px;border:1px solid rgba(0,255,245,.45);
+          border-radius:6px;background:linear-gradient(135deg,rgba(0,255,245,.14),rgba(0,255,245,.05));}
+  .latest .t{font-weight:700;color:var(--cyan);font-size:1rem;}
+  .latest .d{color:var(--muted);font-size:.82rem;margin-top:3px;}
+  .latest a{color:#0f172a;background:var(--cyan);padding:9px 18px;border-radius:4px;
+            text-decoration:none;font-weight:700;font-size:.88rem;white-space:nowrap;}
+  h2{font-size:.95rem;color:var(--muted);font-weight:600;margin:28px 0 10px;
+     letter-spacing:1px;text-transform:uppercase;}
+  ul{list-style:none;margin:0;padding:0;}
+  li{border-bottom:1px solid rgba(226,232,240,.08);}
+  li a{display:flex;justify-content:space-between;gap:12px;padding:13px 4px;
+       color:var(--text);text-decoration:none;font-size:.94rem;transition:.15s;}
+  li a:hover{color:var(--cyan);padding-left:10px;}
+  li .m{color:var(--muted);font-size:.82rem;white-space:nowrap;}
+  .foot{margin-top:36px;color:var(--muted);font-size:.78rem;line-height:1.9;
+        border-top:1px solid rgba(226,232,240,.08);padding-top:16px;}
+  .foot code{background:rgba(226,232,240,.1);padding:1px 5px;border-radius:3px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>B端商城運營分析報告</h1>
+  <div class="sub">每週線上渠道運營分析：推送成效、客戶轉化、產品結構、渠道遷移與下週行動建議。<br>
+  報告頁面為靜態 HTML，免登錄即可查看，支援頁內編輯與 PDF 匯出。</div>
+
+  <div class="latest">
+    <div>
+      <div class="t">最新一期：2026 年第 43 周</div>
+      <div class="d">10 月 19 日 – 10 月 24 日</div>
+    </div>
+    <a href="report-week43.html">開啟最新報告 →</a>
+  </div>
+
+  <h2>週報存檔</h2>
+  <ul>
+    <li><a href="report-week43.html"><span>2026 年第 43 周（10.19–10.24）</span><span class="m">最新</span></a></li>
+    <li><a href="report-week42.html"><span>2026 年第 42 周（10.12–10.17）</span><span class="m">10 月 20 日</span></a></li>
+    <li><a href="report-week41.html"><span>2026 年第 41 周（10.05–10.10）</span><span class="m">10 月 12 日</span></a></li>
+    <li><a href="report-week40.html"><span>2026 年第 40 周（09.28–10.03）</span><span class="m">10 月 06 日</span></a></li>
+    <li><a href="report-week39.html"><span>2026 年第 39 周（09.21–09.26）</span><span class="m">09 月 28 日</span></a></li>
+    <li><a href="report-week38.html"><span>2026 年第 38 周（09.14–09.19）</span><span class="m">09 月 21 日</span></a></li>
+    <li><a href="report-week37.html"><span>2026 年第 37 周（09.07–09.12）</span><span class="m">09 月 14 日</span></a></li>
+    <li><a href="report-week36.html"><span>2026 年第 36 周（08.31–09.05）</span><span class="m">09 月 07 日</span></a></li>
+    <li><a href="report-week35.html"><span>2026 年第 35 周（08.24–08.29）</span><span class="m">08 月 31 日</span></a></li>
+  </ul>
+
+  <h2>專題與彙總</h2>
+  <ul>
+    <li><a href="report-quarterly.html"><span>季度經營分析報告</span><span class="m">季度</span></a></li>
+    <li><a href="product-recategory-week42.html"><span>產品小類重分類結果（第 42 周）</span><span class="m">資料治理</span></a></li>
+    <li><a href="report-latest.html"><span>最新一期（固定入口，隨週更新）</span><span class="m">捷徑</span></a></li>
+  </ul>
+
+  <div class="foot">
+    部署方式：GitHub Pages（靜態網站託管，公開唯讀）<br>
+    倉庫：<code>raymondcheong/HK-frozenmeat</code> ・ 分支 <code>main</code> ・ 更新後約 1 分鐘生效<br>
+    連結長期有效，無需登錄；如需歷史版本，直接替換週次網址即可。
+  </div>
+</div>
+</body>
+</html>
